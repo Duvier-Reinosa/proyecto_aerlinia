@@ -1,0 +1,2 @@
+## instalaciones
+`pip install flask`
