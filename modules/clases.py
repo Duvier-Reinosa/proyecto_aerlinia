@@ -1,4 +1,4 @@
-class Aerolinia:
+class Aerolinea:
     def __init__(self, nombre, pais):
         self.nombre = nombre
         self.pais = pais
