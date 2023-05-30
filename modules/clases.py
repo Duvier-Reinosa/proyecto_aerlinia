@@ -8,7 +8,7 @@ class Aerolinea:
 
 
 
-class persona:
+class Persona:
     def __init__(self,identificacion,nombre,celular,coreo):
         self.identificacion=identificacion
         self.nombre=nombre
@@ -19,7 +19,7 @@ class persona:
         print("Nombre: ",self.nombre)
         print("Celular: ",self.celular)
 
-class piloto(persona):
+class Piloto(persona):
     def __init__(self,identificacion,nombre,celular,licencia,rango,horas_vuelo):
         super().__init__(identificacion,nombre,celular)
         self.licencia=licencia
@@ -32,7 +32,7 @@ class piloto(persona):
         print("Horas de vuelo: ",self.horas_vuelo)
 
 
-class pasajero(persona):
+class Pasajero(persona):
     def __init__(self,identificacion,nombre,celular,numero_millas):
         super().__init__(identificacion,nombre,celular)
         self.numero_millas=numero_millas
@@ -40,7 +40,7 @@ class pasajero(persona):
         super().mostrar()
         print("Numero de millas: ",self.numero_millas)
 
-class tripulacion(persona):
+class Tripulacion(persona):
     def __init__(self,identificacion,nombre,edad,celular,funcion):
         super().__init__(identificacion,nombre,celular)
         self.edad=edad
@@ -50,7 +50,7 @@ class tripulacion(persona):
         print("Funcion: ",self.funcion)
 
 
-class avion:
+class Avion:
     def __init__(self,matricula,modelo,marca,anio,aerolinea,horas_vuelo,capacida_silla):
         self.matricula=matricula
         self.modelo=modelo
@@ -68,7 +68,7 @@ class avion:
         print("Año: ",self.anio)
         print("Horas de vuelo: ",self.horas_vuelo)
 
-class vuelo:
+class Vuelo:
     def __init__(self,numero_vuelo,tipo_vuelo,origen,destino,fecha_ida,fecha_regreso,hora_ida,hora_regreso):
         self.numero_vuelo=numero_vuelo
         self.origen=origen
@@ -86,7 +86,7 @@ class vuelo:
         print("Fecha: ",self.fecha_ida)
         print("Hora: ",self.hora_ida)
 
-class vuelo_comercial(vuelo):
+class Vuelo_comercial(vuelo):
     def __init__(self,numero_vuelo,tipo_vuelo,origen,destino,fecha_ida,fecha_regreso,hora_ida,hora_regreso,numero_pasajeros,precio):
         super().__init__(numero_vuelo,tipo_vuelo,origen,destino,fecha_ida,fecha_regreso,hora_ida,hora_regreso)
         self.numero_pasajeros=numero_pasajeros
@@ -97,7 +97,7 @@ class vuelo_comercial(vuelo):
         print("Numero de pasajeros: ",self.numero_pasajeros)
 
 
-class vuelo_privado(vuelo):
+class Vuelo_privado(vuelo):
     def __init__(self,numero_vuelo,tipo_vuelo,origen,destino,fecha_ida,fecha_regreso,hora_ida,hora_regreso,numero_pasajeros,precio):
         super().__init__(numero_vuelo,tipo_vuelo,origen,destino,fecha_ida,fecha_regreso,hora_ida,hora_regreso)
         self.numero_pasajeros=numero_pasajeros
