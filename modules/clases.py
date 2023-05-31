@@ -8,6 +8,7 @@ class Aerolinea:
 
 
 
+
 class persona:
     def __init__(self,identificacion,nombre,celular,coreo):
         self.identificacion=identificacion
