@@ -1,0 +1,92 @@
+body{
+    /* background-color: #31c292; */
+    background-color: #fff;
+    color: #1d1d1d;
+    font-family: 'Roboto', sans-serif;
+}
+
+nav{
+    background-color: #31c292;
+    border-radius: 25px;
+    height: 70px;
+    margin: 20px;
+}
+
+ul  {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0;
+    height: 100%;
+    padding-right: 30px;
+}
+li {
+    list-style: none;
+}
+
+li a{
+    text-decoration: none;
+    color: #1d1d1d;
+    font-weight: 600;
+} 
+li a img{
+    height: 50px;
+}
+.container{
+    height: 70vh;
+    background-color: #31c292;
+    margin: 20px;
+    border-radius: 20px;
+    padding: 20px;
+}
+.card{
+    width: 250px;
+    height: 165px;
+    background-color: #fff;
+    padding: 15px;
+    border-radius: 25px;
+}
+.cardHeader{
+    display: flex;
+    align-items: center;
+
+}
+.cardHeader img{
+    width: 20px;
+    height: 20px;
+}
+.cardHeader h2{
+    font-size: 18px;
+    margin-left: 10px;
+}
+.cardBody{
+    display: flex;
+    flex-direction: column;
+}
+.cardBody p{
+    font-size: 14px;
+    margin: 5px 5px 0 0px;
+    height: 20px;
+    width: auto;
+    display: flex;
+    align-items: center;
+    padding: 0 5px 0 10px;
+}
+.yellowMarker{
+    background-color: #ffe347;
+    border-radius: 25px;
+}
+
+.redMarker{
+    background-color: #ff4747;
+    border-radius: 25px;
+    padding: 0 5px 0 5px;
+
+}
+.cardFooter{
+    display: flex;
+    justify-content: flex-end;
+}
+.cardFooter p{
+    font-weight: 600;
+}

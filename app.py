@@ -1,6 +1,11 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, url_for, send_from_directory, send_file
+import os
 
 app = Flask(__name__)
+
+app.static_folder = 'static'
+app.static_url_path = '/static'
+
 
 
 @app.route('/')
@@ -11,7 +16,7 @@ def index():
 def vuelo():
     return render_template('vistas/vuelo.html')
 
-@app.route('/misvuelos')
+@app.route('/misVuelos')
 def misVuelos():
     return render_template('vistas/misVuelos.html')
 
@@ -26,6 +31,7 @@ def login():
         return []
     else:
         return []
+    
 
 if __name__ == '__main__':
     app.run()

@@ -5,8 +5,38 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Aerolinia x</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
 </head>
 <body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="./"><img src="{{ url_for('static', filename='assets/logo.png') }}" alt=""></a></li>
+                <li><a href="misVuelos">Mis vuelos</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="container">
+        <h1>Vuelos</h1>
+        <div class="card">
+            <div class="cardHeader">
+                <img src="{{ url_for('static', filename='assets/avion.png') }}" alt="" />
+                <h2>Cartagena - Pereira</h2>
+            </div>
+            <div class="cardBody">
+                <p class="yellowMarker">Fecha de vuelo: 12/12/2021</p>
+                <p>Salida: 12:00</p>
+                <p class="redMarker">Duración: 2h</p>
+            </div>
+            <div class="cardFooter">
+                <p>$160.000</p>
+            </div>
+        </div>
+    </div>
     
 </body>
 </html>
