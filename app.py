@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, url_for, send_from_directory, send_file
 import os
-from metodos import metodos
+from metodos import listarVuelos
 
 app = Flask(__name__)
 
@@ -13,9 +13,10 @@ app.static_url_path = '/static'
 def index():
     return render_template('vistas/index.html')
 
-@app.route('/vuelo')
-def vuelo():
-    return render_template('vistas/vuelo.html')
+@app.route('/vuelo/<id>')
+def vuelo(id):
+    print(id)
+    return render_template('vistas/vuelo.html', id = id)
 
 @app.route('/misVuelos')
 def misVuelos():
@@ -29,7 +30,7 @@ def pagar():
 def login():
     if request.method == 'GET':
         # agregar metodo para obtener los vuelos, se pueden guardar en un archivo de texto hacer un metodo en el archivo metodos para obtener los vuelos
-        return metodos.listarVuelos()
+        return listarVuelos()
     else:
         return []
     

@@ -8,6 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vuelo</title>
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -19,6 +20,35 @@
             </ul>
         </nav>
     </header>
+    <div class="container">
+        <div class="flyDetailContainer">
+            <div class="flyDetails">
+                <div class="titleContainer">
+                    <img src="{{ url_for('static', filename='assets/mapa.png') }}" alt="">
+                    <h1>Detalles del vuelo</h1>
+                </div>
+                <div class="imgTitleContainer">
+                    <h2>Pereira - Cartagena</h2>
+                    <img src="{{ url_for('static', filename='assets/ventanaavion.avif') }}" alt="">
+                    <div class="overlay"></div>
+                </div>
+            </div>
+            <div class="clases">
+                <div class="clase">
+                    <div class="titleContainer">
+                        <img src="{{ url_for('static', filename='assets/empresario.png') }}" alt="">
+                        <h3>Clase ejecutiva</h1>
+                    </div>
+                </div>
+                <div class="clase">
+                    <div class="titleContainer">
+                        <img src="{{ url_for('static', filename='assets/turista.png') }}" alt="">
+                        <h3>Clase comercial</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     
 </body>
 </html>

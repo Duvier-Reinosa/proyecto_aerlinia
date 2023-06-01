@@ -88,10 +88,10 @@ class Vuelo:
         print("Destino: ",self.destino)
         print("Fecha: ",self.fecha_ida)
         print("Hora: ",self.hora_ida)
-class ticketeTurista:
-    
+# class ticketeTurista:
 
-class ticketeEjecutivo
+
+# class ticketeEjecutivo
 
 # class Vuelo_comercial(Vuelo):
 #     def __init__(self,numero_vuelo,tipo_vuelo,origen,destino,fecha_ida,fecha_regreso,hora_ida,hora_regreso,numero_pasajeros,precio):
