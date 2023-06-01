@@ -74,17 +74,44 @@ class Avion:
         print("Horas de vuelo: ",self.horas_vuelo)
 
 class Vuelo:
-    def __init__(self,numero_vuelo,tipo_vuelo,origen,destino,fecha_ida,hora_ida,hora_llegada):
+    def __init__(self,numero_vuelo,tipo_vuelo,tipo_tarifa,tipo_valor,origen,destino,fecha_ida,hora_ida,hora_llegada):
         self.numero_vuelo=numero_vuelo
         self.origen=origen
+        self.tipo_tarifa=tipo_tarifa
         self.destino=destino
         self.fecha_ida=fecha_ida
         self.hora_ida=hora_ida
         self.hora_llegada=hora_llegada
         self.tipo_vuelo=tipo_vuelo
+        self.tipo_valor=tipo_valor
         self.matricula_avion = None
         self.identifica_piloto=None
         self.identifica_tripulacion=[]
+    def valor_tiquete(self):
+        if self.tipo_tarifa=="viajero":
+            self.valor=500    
+
+class tiquete(Vuelo):
+    def __init__(self, numero_vuelo, tipo_vuelo,tipo_tarifa,tipo_valor, origen, destino, fecha_ida, hora_ida, hora_llegada,identificacion,nombre,celular,correo,valor,silla):
+        Vuelo.__init__(numero_vuelo, tipo_vuelo,tipo_tarifa,tipo_valor, origen, destino, fecha_ida, hora_ida, hora_llegada)
+        self.identificacion=identificacion
+        self.nombre=nombre
+        self.celular=celular
+        self.correo=correo
+        self.valor=valor
+        self.silla=silla
+        self.equipaje_mano=True
+        self.equipaje_bodega=None
+    def activar_equipa_bodega(self):
+        if self.tipo_tarifa=="preferencial" or self.tipo_tarifa=="premium":
+            self.equipaje_bodega=True
+        else:
+            self.equipaje_bodega=False
+            
+    
+        
+        
+        
 
     def mostrar(self):
         print("Numero de vuelo: ",self.numero_vuelo)
