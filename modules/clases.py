@@ -79,6 +79,8 @@ class Vuelo:
         self.hora_ida=hora_ida
         self.hora_regreso=hora_regreso
         self.tipo_vuelo=tipo_vuelo
+        self.matricula_avion = None
+
     def mostrar(self):
         print("Numero de vuelo: ",self.numero_vuelo)
         print("Tipo de vuelo: ",self.tipo_vuelo)
@@ -86,25 +88,29 @@ class Vuelo:
         print("Destino: ",self.destino)
         print("Fecha: ",self.fecha_ida)
         print("Hora: ",self.hora_ida)
+class ticketeTurista:
+    
 
-class Vuelo_comercial(Vuelo):
-    def __init__(self,numero_vuelo,tipo_vuelo,origen,destino,fecha_ida,fecha_regreso,hora_ida,hora_regreso,numero_pasajeros,precio):
-        super().__init__(numero_vuelo,tipo_vuelo,origen,destino,fecha_ida,fecha_regreso,hora_ida,hora_regreso)
-        self.numero_pasajeros=numero_pasajeros
-        self.precio=precio
-        self.capidad_equipaje=0
-    def mostrar(self):
-        super().mostrar()
-        print("Numero de pasajeros: ",self.numero_pasajeros)
+class ticketeEjecutivo
+
+# class Vuelo_comercial(Vuelo):
+#     def __init__(self,numero_vuelo,tipo_vuelo,origen,destino,fecha_ida,fecha_regreso,hora_ida,hora_regreso,numero_pasajeros,precio):
+#         super().__init__(numero_vuelo,tipo_vuelo,origen,destino,fecha_ida,fecha_regreso,hora_ida,hora_regreso)
+#         self.numero_pasajeros=numero_pasajeros
+#         self.precio=precio
+#         self.capidad_equipaje=0
+#     def mostrar(self):
+#         super().mostrar()
+#         print("Numero de pasajeros: ",self.numero_pasajeros)
 
 
-class Vuelo_privado(Vuelo):
-    def __init__(self,numero_vuelo,tipo_vuelo,origen,destino,fecha_ida,fecha_regreso,hora_ida,hora_regreso,numero_pasajeros,precio):
-        super().__init__(numero_vuelo,tipo_vuelo,origen,destino,fecha_ida,fecha_regreso,hora_ida,hora_regreso)
-        self.numero_pasajeros=numero_pasajeros
-        self.precio=precio
-    def mostrar(self):
-        super().mostrar()
-        print("Numero de pasajeros: ",self.numero_pasajeros)
+# class Vuelo_privado(Vuelo):
+#     def __init__(self,numero_vuelo,tipo_vuelo,origen,destino,fecha_ida,fecha_regreso,hora_ida,hora_regreso,numero_pasajeros,precio):
+#         super().__init__(numero_vuelo,tipo_vuelo,origen,destino,fecha_ida,fecha_regreso,hora_ida,hora_regreso)
+#         self.numero_pasajeros=numero_pasajeros
+#         self.precio=precio
+#     def mostrar(self):
+#         super().mostrar()
+#         print("Numero de pasajeros: ",self.numero_pasajeros)
 
 

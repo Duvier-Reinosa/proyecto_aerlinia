@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, url_for, send_from_directory, send_file
 import os
+from metodos import metodos
 
 app = Flask(__name__)
 
@@ -28,7 +29,7 @@ def pagar():
 def login():
     if request.method == 'GET':
         # agregar metodo para obtener los vuelos, se pueden guardar en un archivo de texto hacer un metodo en el archivo metodos para obtener los vuelos
-        return []
+        return metodos.listarVuelos()
     else:
         return []
     
