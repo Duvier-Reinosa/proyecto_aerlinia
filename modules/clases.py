@@ -94,7 +94,6 @@ class Vuelo:
         print("Fecha: ",self.fecha_ida)
         print("Hora: ",self.hora_ida)
 
-
 # class Vuelo_comercial(Vuelo):
 #     def __init__(self,numero_vuelo,tipo_vuelo,origen,destino,fecha_ida,fecha_regreso,hora_ida,hora_regreso,numero_pasajeros,precio):
 #         super().__init__(numero_vuelo,tipo_vuelo,origen,destino,fecha_ida,fecha_regreso,hora_ida,hora_regreso)
