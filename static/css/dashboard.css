@@ -46,10 +46,19 @@
     margin-top: 20px;
     font-weight: 600;
 }
-.selectorCity{
+#selectorCity{
     margin-top: 10px;
     height: 40px;
     border-radius: 25px;
     border: 2px black solid;
     text-indent: 10px;
+}
+
+.redirectButton{
+    height: 35px;
+    width: 150px;
+    border: #000 2px solid;
+    border-radius: 25px;
+    cursor: pointer;
+    font-weight: 600;
 }

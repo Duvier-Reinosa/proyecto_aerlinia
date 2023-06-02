@@ -41,12 +41,12 @@
                                 <h2>${vuelo.origen} - ${vuelo.destino}</h2>
                             </div>
                             <div class="cardBody">
-                                <p class="yellowMarker">Fecha de vuelo: 12/12/2021</p>
-                                <p>Salida: 12:00</p>
-                                <p class="redMarker">Duración: 2h</p>
+                                <p class="yellowMarker">Fecha de vuelo: ${vuelo.fechaVuelo}</p>
+                                <p>Salida: ${vuelo.horaSalida}</p>
+                                <p class="redMarker">Llegada: ${vuelo.horaLlegada}</p>
                             </div>
                             <div class="cardFooter">
-                                <p>$160.000</p>
+                                <p>$${vuelo.precio[0]}</p>
                             </div>
                         </div>`;
                     });

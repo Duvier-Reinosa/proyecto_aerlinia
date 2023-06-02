@@ -74,7 +74,7 @@ class Avion:
         print("Horas de vuelo: ",self.horas_vuelo)
 
 class Vuelo:
-    def __init__(self,numero_vuelo,tipo_vuelo,tipo_tarifa,tipo_valor,origen,destino,fecha_ida,hora_ida,hora_llegada):
+    def __init__(self,numero_vuelo,tipo_vuelo,tipo_tarifa,origen,destino,fecha_ida,hora_ida,hora_llegada):
         self.numero_vuelo=numero_vuelo
         self.origen=origen
         self.tipo_tarifa=tipo_tarifa

@@ -56,7 +56,7 @@ def leer_vuelos():
 #-----------verificaciones--------------
 def verificar_matricula(aviones,matricula):
     if os.path.exists("archivos/aviones.pickle"): ### reviso si el archivo esta creado para obtener los datos
-        aviones=leer_usuarios()
+        aviones=leer_aviones()
     ver=True
     while ver:
         cant_aviones=len(aviones)
@@ -124,11 +124,15 @@ def verificar_vuelo(vuelos,codigo):
 def registrar_aviones(aviones,matricula,modelo,marca,anio,aerolinea,horas_vuelo,capacida_silla):
     if os.path.exists("archivos/aviones.pickle"): ### reviso si el archivo esta creado para obtener los datos
         aviones=leer_aviones()
-    matric=verificar_matricula(aviones,matricula)         
+    matric = verificar_matricula(aviones,matricula)  
+
+    if matric:
+        avion= clases.Avion(matricula,modelo,marca,anio,aerolinea,horas_vuelo,capacida_silla)
+        aviones.append(avion)
+        registra_avion(aviones)
+    return True
+
     
-    avion= clases.Avion(matricula,modelo,marca,anio,aerolinea,horas_vuelo,capacida_silla)
-    aviones.append(avion)
-    registra_avion(aviones)
 
 def registrar_usuarios(usuarios,identificacion,nombre,celular,correo,contrasena,millas):
     if os.path.exists("archivos/usuario.pickle"): ### reviso si el archivo esta creado para obtener los datos
@@ -152,12 +156,13 @@ def registrar_piloto(piloto,identificacion,nombre,celular,edad,correo,contrasena
     piloto.append(pilot)
     registra_pilotos(piloto)
 
-def registrar_vuelos(vuelos,codigo,tipo_vuelo,tipo_tarifa,origen,destino,fecha,hora_ida,hora_llegada,valor_vuelo):
+def registrar_vuelos(vuelos,codigo,tipo_vuelo,tipo_tarifa,origen,destino,fecha,hora_ida,hora_llegada):
     if os.path.exists("archivos/vuelos.pickle"): ### reviso si el archivo esta creado para obtener los datos
         vuelos=leer_vuelos()
-    vuelo= clases.Vuelo(codigo,tipo_vuelo,tipo_tarifa,valor_vuelo,origen,destino,fecha,hora_ida,hora_llegada)
+    vuelo= clases.Vuelo(codigo,tipo_vuelo,tipo_tarifa,origen,destino,fecha,hora_ida,hora_llegada)
     vuelos.append(vuelo)
     registra_vuelos(vuelos)
+    return True
     
 def registrar_tiquetes(tiquetes,codigo,tipo_vuelo,tipo_tarifa,tipo_valor,c_origen,c_destino,fecha,hora_ida,hora_llegada,identificacion,nombre,celular,correo,valor,silla)  :
     if os.path.exists("archivos/tiquetes.pickle"): ### reviso si el archivo esta creado para obtener los datos
@@ -290,10 +295,9 @@ def listarMatriculasAvion():
 
 # registrar_vuelos([],"1","comercial",["viajero","preferencia","premium"],"perira","cali","15-7-2023","13:00","15:00",[200.000,300.000,400,000])
 # registrar_piloto([],"11182","carlo angola","31233564","25","agola@sa.com","32545","comandante","32sa","300")
-# #registrar_funcionario([],None,None,None,None,None,None,None)
-# #registrar_usuarios([],None,None,None,None,None,None)
+#registrar_funcionario([],None,None,None,None,None,None,None)
+#registrar_usuarios([],None,None,None,None,None,None)
 # print(consultar_vuelos([],"bogota","cali","12-6-2023"))
 # registrar_vuelos([],None,None,None,None,None,None,None,None)
-# #print(verificar_ingreso_usuario([],None,None))
-# #registrar_aviones([],None,None,None,None,None,None,None)
-# listarVuelosApi()
+#print(verificar_ingreso_usuario([],None,None))
+#registrar_aviones([],None,None,None,None,None,None,None)

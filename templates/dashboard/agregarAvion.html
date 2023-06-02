@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agregar Avión</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- def __init__(self,matricula,modelo,marca,anio,aerolinea,horas_vuelo,capacida_silla):
+        self.matricula=matricula
+        self.modelo=modelo
+        self.marca=marca
+        self.anio=anio
+        self.aerolinea=aerolinea
+        self.capacidad_silla=capacida_silla
+        self.horas_vuelo=horas_vuelo
+        self.capacidad_pasajeros=[] -->
+    <div class="container">
+        <h1>Agregar Avión</h1>
+        <form class="form" id="form">
+            <!-- hazme un selector con todas las ciudades de colombia que tengan aeropuerto -->
+            <input placeholder="Matricula" />
+            <input placeholder="Modelo" />
+            <input placeholder="Marca" />
+            <input placeholder="Año" />
+            <input placeholder="Aerolinia" />
+            <input placeholder="Capacidad" />
+            <input placeholder="Horas de vuelo(autonomía)" />
+
+            <button type="submit">Agregar</button>
+        </form>
+    </div>
+    <script>
+        let form = document.getElementById("form")
+        form.addEventListener("submit", function(event) {
+            event.preventDefault();  // Previene el comportamiento de redirección del formulario
+            const dataToSend = {
+                matricula: form[0].value,
+                modelo: form[1].value,
+                marca: form[2].value,
+                anio: form[3].value,
+                aerolinea: form[4].value,
+                capacidad_silla: form[5].value,
+                horas_vuelo: form[6].value,
+                capacidad_pasajeros: []
+            }
+            console.log({event, dataToSend})
+        
+            fetch('/api/dashboard/agregarAvion', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(dataToSend)
+            })
+                .then(response => response.json())
+                .then(data => {
+                    // Maneja la respuesta obtenida del endpoint después de hacer el POST
+                    console.log(data);
+                    form.reset()
+                })
+                .catch(error => {
+                    // Maneja el error en caso de que la solicitud falle
+                    console.log(error);
+                });
+        });
+    </script>
+</body>
+</html>

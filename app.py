@@ -1,13 +1,13 @@
-from flask import Flask, render_template, request, url_for, send_from_directory, send_file
+from flask import Flask, render_template, request
 import os
-from metodos import listarVuelosApi, listarMatriculasAvion
+from metodos import listarVuelosApi, listarMatriculasAvion, registrar_vuelos, registrar_aviones
 
 app = Flask(__name__)
 
 app.static_folder = 'static'
 app.static_url_path = '/static'
 
-# vistas
+# vistas------------------------------------------------------------------
 
 @app.route('/')
 def index():
@@ -26,12 +26,22 @@ def misVuelos():
 def pagar():
     return render_template('vistas/pagar.html')
 
-# vistas dashboard
+# vistas dashboard--------------------------------------------------------
+
+@app.route('/dashboard/home')
+def homeDashboard():
+    return render_template('dashboard/home.html')
+
+
 @app.route('/dashboard/agregarVuelo')
 def agregarVuelo():
     return render_template('dashboard/agregarVuelo.html')
 
-# api /backend
+@app.route('/dashboard/agregarAvion')
+def agregarAvion():
+    return render_template('dashboard/agregarAvion.html')
+
+# api /backend------------------------------------------------------------
 
 @app.route('/api/listaVuelos', methods=['GET'])
 def login():
@@ -41,14 +51,17 @@ def login():
     else:
         return []
     
-# api para dashboard
+# api para dashboard------------------------------------------------------
+
 @app.route('/api/dashboard/agregarVuelo', methods=['POST'])
 def agregarVueloApi():
     if request.method == 'POST':
-        data = request.form 
+        data = request.get_json() 
         print(data)
         # agregar metodo para obtener los vuelos, se pueden guardar en un archivo de texto hacer un metodo en el archivo metodos para obtener los vuelos
-        return []
+        returned =  registrar_vuelos([], data["numero_vuelo"], data["tipo_vuelo"],["turista","ejecutiva"], data["origen"], data["destino"], data["fecha_ida"], data["hora_ida"],data["hora_regreso"])
+        if returned:
+            return {"status": "success"}
     else:
         return []
 #  
@@ -57,6 +70,18 @@ def listasMAtriculas():
     if request.method == 'GET':
         # agregar metodo para obtener los vuelos, se pueden guardar en un archivo de texto hacer un metodo en el archivo metodos para obtener los vuelos
         return listarMatriculasAvion()
+    else:
+        return []
+    
+@app.route('/api/dashboard/agregarAvion', methods=['POST'])
+def agregarAvionApi():
+    if request.method == 'POST':
+        data = request.get_json() 
+        print(data)
+        # agregar metodo para obtener los vuelos, se pueden guardar en un archivo de texto hacer un metodo en el archivo metodos para obtener los vuelos
+        returned =  registrar_aviones([], data["matricula"], data["modelo"], data["marca"], data["anio"], data["aerolinea"], data["horas_vuelo"],data["capacidad_silla"])
+        if returned:
+            return {"status": "success"}
     else:
         return []
     

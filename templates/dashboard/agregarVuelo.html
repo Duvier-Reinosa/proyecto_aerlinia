@@ -10,22 +10,13 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
 </head>
 <body>
-    <!-- self.numero_vuelo=numero_vuelo
-    self.origen=origen
-    self.destino=destino
-    self.fecha_ida=fecha_ida
-    self.fecha_regreso=fecha_regreso
-    self.hora_ida=hora_ida
-    self.hora_regreso=hora_regreso
-    self.tipo_vuelo=tipo_vuelo
-    self.matricula_avion = None -->
     <div class="container">
         <h1>Agregar Vuelo</h1>
-        <form action="/api/dashboard/agregarVuelo" method="post" class="form">
+        <form class="form" id="form">
             <!-- hazme un selector con todas las ciudades de colombia que tengan aeropuerto -->
             <input placeholder="Numero de vuelo" />
             <label for="origen">Ciudad Origen</label>
-            <select class="selectorCity" aria-placeholder="Ciudad Origen">
+            <select class="selectorCityOrigern" id="selectorCity" aria-placeholder="Ciudad Origen">
                 <option value="Bogota">Bogota</option>
                 <option value="Medellin">Medellin</option>
                 <option value="Cali">Cali</option>
@@ -43,7 +34,7 @@
                 <option value="Armenia">Armenia</option>
             </select>
             <label for="origen">Ciudad Destino</label>
-            <select class="selectorCity" aria-placeholder="Ciudad Destino">
+            <select class="selectorCityDestino" id="selectorCity" aria-placeholder="Ciudad Destino">
                 <option value="Bogota">Bogota</option>
                 <option value="Medellin">Medellin</option>
                 <option value="Cali">Cali</option>
@@ -69,12 +60,12 @@
             <label >Fecha de llegada</label>
             <input placeholder="Hora de llegada" type="time" />
             <label for="origen">Ciudad Tipo vuelo</label>
-            <select class="selectorCity" aria-placeholder="tipo_vuelo">
+            <select class="selectorTipoVuelo" id="selectorCity" aria-placeholder="tipo_vuelo">
                 <option value="privado">Privado</option>
                 <option value="comercial">Comercial</option>
             </select>
             <label for="origen">Matricula avion</label>
-            <select class="selectorCity" aria-placeholder="matricula_avion">
+            <select class="selectorMatricula" id="selectorCity" aria-placeholder="matricula_avion">
                 <!-- <option value="privado">Privado</option>
                 <option value="comercial">Comercial</option> -->
             </select>
@@ -82,11 +73,39 @@
         </form>
     </div>
     <script>
-        document.getElementsByClassName("form").addEventListener("submit", function(event) {
+        let form = document.getElementById("form")
+        form.addEventListener("submit", function(event) {
             event.preventDefault();  // Previene el comportamiento de redirección del formulario
-    
-            // Realiza cualquier acción adicional que desees, como limpiar los campos
-            document.getElementsByClassName("form").reset();
+            const dataToSend = {
+                numero_vuelo: event.target[0].value,
+                origen: event.target[1].value,
+                destino: event.target[2].value,
+                fecha_ida: event.target[3].value,
+                fecha_regreso: event.target[4].value,
+                hora_ida: event.target[5].value,
+                hora_regreso: event.target[6].value,
+                tipo_vuelo: event.target[7].value,
+                matricula_avion: event.target[8].value
+            }
+            console.log({event, dataToSend})
+        
+            fetch('/api/dashboard/agregarVuelo', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(dataToSend)
+            })
+                .then(response => response.json())
+                .then(data => {
+                    // Maneja la respuesta obtenida del endpoint después de hacer el POST
+                    console.log(data);
+                    form.reset()
+                })
+                .catch(error => {
+                    // Maneja el error en caso de que la solicitud falle
+                    console.log(error);
+                });
         });
     </script>
 </body>
