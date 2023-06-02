@@ -10,20 +10,22 @@ class Aerolinea:
 
 
 class persona:
-    def __init__(self,identificacion,nombre,celular,coreo):
-        self.identificacion=identificacion
+    def __init__(self,identifica,nombre,celular,correo,contrasena):
+        self.identifica=identifica
         self.nombre=nombre
-        self.correo=coreo
+        self.correo=correo
         self.celular=celular
+        self.contrasena=contrasena
     def mostrar(self):
-        print("Identificacion: ",self.identificacion)
+        print("Identificacion: ",self.identifica)
         print("Nombre: ",self.nombre)
         print("Celular: ",self.celular)
 
 class Piloto(persona):
-    def __init__(self,identificacion,nombre,celular,licencia,rango,horas_vuelo):
-        super().__init__(identificacion,nombre,celular)
+    def __init__(self,identifica,nombre,celular,correo,contrasena,edad,licencia,rango,horas_vuelo):
+        super().__init__(identifica,nombre,celular,correo,contrasena)
         self.licencia=licencia
+        self.edad=edad
         self.rango=rango
         self.horas_vuelo=horas_vuelo
     def mostrar(self):
@@ -34,16 +36,18 @@ class Piloto(persona):
 
 
 class Pasajero(persona):
-    def __init__(self,identificacion,nombre,celular,numero_millas):
-        super().__init__(identificacion,nombre,celular)
+    def __init__(self,identifica,nombre,celular,correo,contrasena,numero_millas):
+        super().__init__(identifica,nombre,celular,correo,contrasena)
         self.numero_millas=numero_millas
+    
     def mostrar(self):
         super().mostrar()
         print("Numero de millas: ",self.numero_millas)
 
 class Tripulacion(persona):
-    def __init__(self,identificacion,nombre,edad,celular,funcion):
-        super().__init__(identificacion,nombre,celular)
+    def __init__(self,identifica,nombre,celular,correo,contrasena,edad,funcion):
+        super().__init__(identifica,nombre,celular,correo,contrasena)
+        
         self.edad=edad
         self.funcion=funcion
     def mostrar(self):
@@ -70,16 +74,44 @@ class Avion:
         print("Horas de vuelo: ",self.horas_vuelo)
 
 class Vuelo:
-    def __init__(self,numero_vuelo,tipo_vuelo,origen,destino,fecha_ida,fecha_regreso,hora_ida,hora_regreso):
+    def __init__(self,numero_vuelo,tipo_vuelo,tipo_tarifa,tipo_valor,origen,destino,fecha_ida,hora_ida,hora_llegada):
         self.numero_vuelo=numero_vuelo
         self.origen=origen
+        self.tipo_tarifa=tipo_tarifa
         self.destino=destino
         self.fecha_ida=fecha_ida
-        self.fecha_regreso=fecha_regreso
         self.hora_ida=hora_ida
-        self.hora_regreso=hora_regreso
+        self.hora_llegada=hora_llegada
         self.tipo_vuelo=tipo_vuelo
+        self.tipo_valor=tipo_valor
         self.matricula_avion = None
+        self.identifica_piloto=None
+        self.identifica_tripulacion=[]
+    def valor_tiquete(self):
+        if self.tipo_tarifa=="viajero":
+            self.valor=500    
+
+class tiquete(Vuelo):
+    def __init__(self, numero_vuelo, tipo_vuelo,tipo_tarifa,tipo_valor, origen, destino, fecha_ida, hora_ida, hora_llegada,identificacion,nombre,celular,correo,valor,silla):
+        Vuelo.__init__(numero_vuelo, tipo_vuelo,tipo_tarifa,tipo_valor, origen, destino, fecha_ida, hora_ida, hora_llegada)
+        self.identificacion=identificacion
+        self.nombre=nombre
+        self.celular=celular
+        self.correo=correo
+        self.valor=valor
+        self.silla=silla
+        self.equipaje_mano=True
+        self.equipaje_bodega=None
+    def activar_equipa_bodega(self):
+        if self.tipo_tarifa=="preferencial" or self.tipo_tarifa=="premium":
+            self.equipaje_bodega=True
+        else:
+            self.equipaje_bodega=False
+            
+    
+        
+        
+        
 
     def mostrar(self):
         print("Numero de vuelo: ",self.numero_vuelo)
@@ -88,10 +120,6 @@ class Vuelo:
         print("Destino: ",self.destino)
         print("Fecha: ",self.fecha_ida)
         print("Hora: ",self.hora_ida)
-# class ticketeTurista:
-
-
-# class ticketeEjecutivo
 
 # class Vuelo_comercial(Vuelo):
 #     def __init__(self,numero_vuelo,tipo_vuelo,origen,destino,fecha_ida,fecha_regreso,hora_ida,hora_regreso,numero_pasajeros,precio):
