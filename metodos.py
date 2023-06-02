@@ -209,7 +209,7 @@ def listarMatriculasAvion():
         aviones.append({
             "matricula": avion.matricula,
         })
-    return aviones
+    return json.dumps(aviones)
 
 
 
