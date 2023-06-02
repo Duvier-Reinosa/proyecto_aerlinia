@@ -119,7 +119,9 @@ def registrar_aviones(aviones,matricula,modelo,marca,anio,aerolinea,horas_vuelo,
         avion= clases.Avion(matricula,modelo,marca,anio,aerolinea,horas_vuelo,capacida_silla)
         aviones.append(avion)
         registra_avion(aviones)
-    return True
+        return True
+    else:
+        return False
 
     
 
@@ -131,7 +133,9 @@ def registrar_usuarios(usuarios,identificacion,nombre,celular,correo,contrasena,
         usuario= clases.Pasajero(identificacion,nombre,celular,correo,contrasena,millas)
         usuarios.append(usuario)
         registra_usuario(usuarios)
-    return True
+        return True
+    else:
+        return False
     #mostrar(usuarios)
 
 
@@ -152,8 +156,7 @@ def registrar_tiquetes(tiquetes,codigo,tipo_vuelo,tipo_tarifa,tipo_valor,c_orige
     tiquetes.append(tiquete)
     registra_tiquetes(tiquetes)
     
-def registrar_tripulante_vuelo():
-   pass 
+
 ##---consultar vuelos----
 def consultar_vuelos(vuelos,c_origen,c_destino,fecha):
     if os.path.exists("archivos/vuelos.pickle"): ### reviso si el archivo esta creado para obtener los datos

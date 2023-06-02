@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request
 import os
-from metodos import listarVuelosApi, listarMatriculasAvion, registrar_vuelos, registrar_aviones,registrar_usuarios
+from metodos import listarVuelosApi, listarMatriculasAvion, registrar_vuelos, registrar_aviones,registrar_usuarios,verificar_ingreso_usuario
 
 app = Flask(__name__)
 
@@ -32,6 +32,9 @@ def pagar():
 def homeDashboard():
     return render_template('dashboard/home.html')
 
+@app.route('/dashboard/iniciarSecion')
+def iniciarSecion():
+    return render_template('dashboard/inciarSecion.html')
 
 @app.route('/dashboard/agregarVuelo')
 def agregarVuelo():
@@ -91,6 +94,7 @@ def agregarAvionApi():
             return {"status": "success"}
     else:
         return []
+    
 @app.route('/api/dashboard/agregarUsuario', methods=['POST'])
 def agregarUsuarioApi():
     if request.method == 'POST':
@@ -102,6 +106,17 @@ def agregarUsuarioApi():
             return {"status": "success"}
     else:
         return []
-
+    
+@app.route('/api/dashboard/iniciarSecion', methods=['POST'])    
+def iniciarSecionApi():
+    if request.method == 'POST':
+        data = request.get_json() 
+        print(data)
+        # agregar metodo para obtener los vuelos, se pueden guardar en un archivo de texto hacer un metodo en el archivo metodos para obtener los vuelos
+        returned =  verificar_ingreso_usuario([], data["identificacion"],data["contrasena"])
+        if returned:
+            return {"status": "success"}
+    else:
+        return []
 if __name__ == '__main__':
     app.run()

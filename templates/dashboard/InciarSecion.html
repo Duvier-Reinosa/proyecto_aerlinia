@@ -19,37 +19,28 @@
 </head>
 <body>
     <div class="container">
-        <h1>Registrase</h1>
+        <h1>Iniciar secion</h1>
         <form class="form" id="form">
             <!-- hazme un selector con todas las ciudades de colombia que tengan aeropuerto -->
             
             <label >identificacion</label>
             <input placeholder="Identificacion" onkeypress="validarInput(event)" required>
-            <label >Nombre</label>
-            <input placeholder="Nombre" type=""required>
-            <label >celular</label>
-            <input placeholder="Celular" onkeypress="validarInput(event)" required>
-            <label >correo</label>
-            <input placeholder="Correo" type="email"  required>
             <label for="origen">Contraseña</label>
             <input placeholder="Contrasena" type="password" minlength="6" required >
-            <button type="submit">Registrases</button>
+            <button type="submit">Iniciar Seción</button>
         </form>
-        <p>Ingresa a tu cuenta <a href="iniciarSecion">Inciar seción</a></p>
+        <p>¿Aún no tienes una cuenta? <a href="agregarUsuario">Registrar</a></p>
     </div>
     <script>
         form.addEventListener("submit", function(event) {
             event.preventDefault();  // Previene el comportamiento de redirección del formulario
             const dataToSend = {
                 identificacion: event.target[0].value,
-                nombre: event.target[1].value,
-                celular: event.target[2].value,
-                correo: event.target[3].value,
-                contrasena: event.target[4].value,
+                contrasena: event.target[1].value,
             }
             console.log({event, dataToSend})
         
-            fetch('/api/dashboard/agregarUsuario', {
+            fetch('/api/dashboard/iniciarSecion', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
