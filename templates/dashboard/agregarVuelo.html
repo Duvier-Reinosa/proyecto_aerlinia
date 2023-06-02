@@ -65,7 +65,7 @@
                 <option value="comercial">Comercial</option>
             </select>
             <label for="origen">Matricula avion</label>
-            <select class="selectorMatricula" id="selectorCity" aria-placeholder="matricula_avion">
+            <select class="selectorMatricula" id="selectorMat" aria-placeholder="matricula_avion">
                 <!-- <option value="privado">Privado</option>
                 <option value="comercial">Comercial</option> -->
             </select>
@@ -74,6 +74,7 @@
     </div>
     <script>
         let form = document.getElementById("form")
+        let matriculasSelector = document.getElementById("selectorMat")
         form.addEventListener("submit", function(event) {
             event.preventDefault();  // Previene el comportamiento de redirección del formulario
             const dataToSend = {
@@ -106,6 +107,17 @@
                     // Maneja el error en caso de que la solicitud falle
                     console.log(error);
                 });
+        });
+        document.addEventListener("DOMContentLoaded", function() {
+            fetch('/api/dashboard/listarMatriculas')
+                .then(response => response.json())
+                .then(response => {
+                    console.log(matriculasSelector)
+                    response.forEach(matricula => {
+                        matriculasSelector.innerHTML += `<option value="${matricula.matricula}">${matricula.matricula}</option>`
+                    });
+                    console.log(response)
+                })
         });
     </script>
 </body>

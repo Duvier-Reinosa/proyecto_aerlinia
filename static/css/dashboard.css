@@ -53,6 +53,13 @@
     border: 2px black solid;
     text-indent: 10px;
 }
+#selectorMat{
+    margin-top: 10px;
+    height: 40px;
+    border-radius: 25px;
+    border: 2px black solid;
+    text-indent: 10px;
+}
 
 .redirectButton{
     height: 35px;
