@@ -1,13 +1,8 @@
 import pickle
 import os
 from  modules import clases
+import json
 
-def listarVuelos():
-    vuelos = []
-    #abrir el archivo donde está la lista de vuelos
-    #formatearlos en una lista[]
-    #retornar la lista
-    return vuelos
 
 def mostrar(lista):
     for a in lista:
@@ -55,7 +50,7 @@ def leer_pilotos():
             return pilotos
 def leer_vuelos():
         with open("archivos/vuelos.pickle", "rb") as archivo:
-            vuelos= pickle.load(archivo)
+            vuelos = pickle.load(archivo)
             return vuelos
         
 #-----------verificaciones--------------
@@ -251,14 +246,41 @@ def verificar_ingreso_piloto(piloto,identificacion,contraseña):
             break
 
 
+def listarVuelosApi():
+    vuelosFile = leer_vuelos()
+    vuelos = []
+    for vuelo in vuelosFile:
+        vuelos.append({
+            "origen": vuelo.origen,
+            "destino": vuelo.destino,
+            "fechaVuelo": vuelo.fecha_ida,
+            "horaSalida": vuelo.hora_ida,
+            "horaLlegada": vuelo.hora_llegada,
+            "tipoVuelo": vuelo.tipo_vuelo,
+            "precio": vuelo.tipo_valor
+        })
+    return json.dumps(vuelos)
+
+def listarMatriculasAvion():
+    avionesFile = leer_aviones()
+    aviones = []
+    for avion in avionesFile:
+        aviones.append({
+            "matricula": avion.matricula,
+        })
+    return aviones
+
+
+
 ##----------verificar vuelos  programados---
 
 
-registrar_vuelos([],"1","comercial",["viajero","preferencia","premium"],"perira","cali","15-7-2023","13:00","15:00",[200.000,300.000,400,000])
-registrar_piloto([],"11182","carlo angola","31233564","25","agola@sa.com","32545","comandante","32sa","300")
-#registrar_funcionario([],None,None,None,None,None,None,None)
-#registrar_usuarios([],None,None,None,None,None,None)
-print(consultar_vuelos([],"bogota","cali","12-6-2023"))
-registrar_vuelos([],None,None,None,None,None,None,None,None)
-#print(verificar_ingreso_usuario([],None,None))
-#registrar_aviones([],None,None,None,None,None,None,None)
+# registrar_vuelos([],"1","comercial",["viajero","preferencia","premium"],"perira","cali","15-7-2023","13:00","15:00",[200.000,300.000,400,000])
+# registrar_piloto([],"11182","carlo angola","31233564","25","agola@sa.com","32545","comandante","32sa","300")
+# #registrar_funcionario([],None,None,None,None,None,None,None)
+# #registrar_usuarios([],None,None,None,None,None,None)
+# print(consultar_vuelos([],"bogota","cali","12-6-2023"))
+# registrar_vuelos([],None,None,None,None,None,None,None,None)
+# #print(verificar_ingreso_usuario([],None,None))
+# #registrar_aviones([],None,None,None,None,None,None,None)
+# listarVuelosApi()

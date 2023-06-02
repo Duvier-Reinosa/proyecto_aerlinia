@@ -47,6 +47,7 @@ li a img{
     border-radius: 25px;
     cursor: pointer;
     transition: all 0.3s ease-in-out;
+    margin: 0px 10px 0px 10px;
 }
 .card:hover{
     -webkit-box-shadow: 0px 0px 15px -2px #1a664d;
@@ -161,4 +162,10 @@ li a img{
     background-color: rgba(0, 0, 0, 0.5);
     z-index: 10;
     border-radius: 25px;
+  }
+
+
+  #containerVuelos{
+    display: flex;
+    flex-wrap: wrap;
   }

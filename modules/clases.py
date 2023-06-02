@@ -83,7 +83,7 @@ class Vuelo:
         self.hora_ida=hora_ida
         self.hora_llegada=hora_llegada
         self.tipo_vuelo=tipo_vuelo
-        self.tipo_valor=tipo_valor
+        self.tipo_valor= [100, 400]
         self.matricula_avion = None
         self.identifica_piloto=None
         self.identifica_tripulacion=[]

@@ -21,19 +21,73 @@
     self.matricula_avion = None -->
     <div class="container">
         <h1>Agregar Vuelo</h1>
-        <form action="" method="post" class="form">
-            <input placeholder="Numero de vuelo"/>
-            <input placeholder="Ciudad de origen"/>
-            <input placeholder="Ciudad de destino"/>
-            <input placeholder="Fecha de salida"/>
-            <input placeholder="Fecha de llegada"/>
-            <input placeholder="Hora de salida"/>
-            <input placeholder="Hora de llegada"/>
-            <input placeholder="Tipo de vuelo"/>
-            <input placeholder="Matricula avión"/>
+        <form action="/api/dashboard/agregarVuelo" method="post" class="form">
+            <!-- hazme un selector con todas las ciudades de colombia que tengan aeropuerto -->
+            <input placeholder="Numero de vuelo" />
+            <label for="origen">Ciudad Origen</label>
+            <select class="selectorCity" aria-placeholder="Ciudad Origen">
+                <option value="Bogota">Bogota</option>
+                <option value="Medellin">Medellin</option>
+                <option value="Cali">Cali</option>
+                <option value="Barranquilla">Barranquilla</option>
+                <option value="Cartagena">Cartagena</option>
+                <option value="Cucuta">Cucuta</option>
+                <option value="Ibague">Ibague</option>
+                <option value="Bucaramanga">Bucaramanga</option>
+                <option value="Santa Marta">Santa Marta</option>
+                <option value="Villavicencio">Villavicencio</option>
+                <option value="Pereira">Pereira</option>
+                <option value="Pasto">Pasto</option>
+                <option value="Manizales">Manizales</option>
+                <option value="Neiva">Neiva</option>
+                <option value="Armenia">Armenia</option>
+            </select>
+            <label for="origen">Ciudad Destino</label>
+            <select class="selectorCity" aria-placeholder="Ciudad Destino">
+                <option value="Bogota">Bogota</option>
+                <option value="Medellin">Medellin</option>
+                <option value="Cali">Cali</option>
+                <option value="Barranquilla">Barranquilla</option>
+                <option value="Cartagena">Cartagena</option>
+                <option value="Cucuta">Cucuta</option>
+                <option value="Ibague">Ibague</option>
+                <option value="Bucaramanga">Bucaramanga</option>
+                <option value="Santa Marta">Santa Marta</option>
+                <option value="Villavicencio">Villavicencio</option>
+                <option value="Pereira">Pereira</option>
+                <option value="Pasto">Pasto</option>
+                <option value="Manizales">Manizales</option>
+                <option value="Neiva">Neiva</option>
+                <option value="Armenia">Armenia</option>
+            </select>
+            <label >Fecha de salida</label>
+            <input placeholder="Fecha de salida" type="date"/>
+            <label >Fecha de llegada</label>
+            <input placeholder="Fecha de llegada" type="date"/>
+            <label >Hora de salida</label>
+            <input placeholder="Hora de salida" type="time"/>
+            <label >Fecha de llegada</label>
+            <input placeholder="Hora de llegada" type="time" />
+            <label for="origen">Ciudad Tipo vuelo</label>
+            <select class="selectorCity" aria-placeholder="tipo_vuelo">
+                <option value="privado">Privado</option>
+                <option value="comercial">Comercial</option>
+            </select>
+            <label for="origen">Matricula avion</label>
+            <select class="selectorCity" aria-placeholder="matricula_avion">
+                <!-- <option value="privado">Privado</option>
+                <option value="comercial">Comercial</option> -->
+            </select>
             <button type="submit">Agregar</button>
         </form>
     </div>
+    <script>
+        document.getElementsByClassName("form").addEventListener("submit", function(event) {
+            event.preventDefault();  // Previene el comportamiento de redirección del formulario
     
+            // Realiza cualquier acción adicional que desees, como limpiar los campos
+            document.getElementsByClassName("form").reset();
+        });
+    </script>
 </body>
 </html>

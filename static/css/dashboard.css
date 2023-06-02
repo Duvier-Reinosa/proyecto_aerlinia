@@ -41,3 +41,15 @@
     font-weight: 600;
     font-size: 16px;
 }
+.form label{
+    font-size: 12px;
+    margin-top: 20px;
+    font-weight: 600;
+}
+.selectorCity{
+    margin-top: 10px;
+    height: 40px;
+    border-radius: 25px;
+    border: 2px black solid;
+    text-indent: 10px;
+}

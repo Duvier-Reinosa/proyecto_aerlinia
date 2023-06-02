@@ -22,21 +22,40 @@
 
     <div class="container">
         <h1>Vuelos</h1>
-        <div class="card" onclick="window.location.href = '/vuelo/1'">
-            <div class="cardHeader">
-                <img src="{{ url_for('static', filename='assets/avion.png') }}" alt="" />
-                <h2>Cartagena - Pereira</h2>
-            </div>
-            <div class="cardBody">
-                <p class="yellowMarker">Fecha de vuelo: 12/12/2021</p>
-                <p>Salida: 12:00</p>
-                <p class="redMarker">Duración: 2h</p>
-            </div>
-            <div class="cardFooter">
-                <p>$160.000</p>
-            </div>
-        </div>
+        <div id="containerVuelos"></div>
+
     </div>
-    
+    <script>
+        let containerVuelos = document.getElementById('containerVuelos');
+        document.addEventListener('DOMContentLoaded', function() {
+            fetch('/api/listaVuelos')  // Reemplaza con la ruta de tu endpoint Flask
+                .then(response => response.json())
+                .then(vuelos => {
+                    // Manipula la respuesta obtenida del endpoint
+                    console.log(vuelos);
+                    vuelos.forEach(vuelo => {
+                        containerVuelos.innerHTML += `
+                        <div class="card" onclick="window.location.href = '/vuelo/1'">
+                            <div class="cardHeader">
+                                <img src="{{ url_for('static', filename='assets/avion.png') }}" alt="" />
+                                <h2>${vuelo.origen} - ${vuelo.destino}</h2>
+                            </div>
+                            <div class="cardBody">
+                                <p class="yellowMarker">Fecha de vuelo: 12/12/2021</p>
+                                <p>Salida: 12:00</p>
+                                <p class="redMarker">Duración: 2h</p>
+                            </div>
+                            <div class="cardFooter">
+                                <p>$160.000</p>
+                            </div>
+                        </div>`;
+                    });
+                })
+                .catch(error => {
+                    // Maneja el error en caso de que la solicitud falle
+                    console.log(error);
+                });
+        });
+    </script>
 </body>
 </html>
