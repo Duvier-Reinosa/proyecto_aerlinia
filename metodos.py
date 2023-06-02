@@ -13,14 +13,9 @@ def registra_avion(lista):
 def registra_usuario(lista):
     with open("archivos/usuario.pickle", "wb") as archivo:
         pickle.dump(lista, archivo)
-def registra_funcionario(lista):
-    with open("archivos/funcionario.pickle", "wb") as archivo:
-        pickle.dump(lista, archivo)
+
 def registra_tiquetes(lista):
     with open("archivos/tiquetes.pickle", "wb") as archivo:
-        pickle.dump(lista, archivo)
-def registra_pilotos(lista):
-    with open("archivos/pilotos.pickle", "wb") as archivo:
         pickle.dump(lista, archivo)
 
 def registra_vuelos(lista):
@@ -32,10 +27,7 @@ def leer_aviones():
      with open("archivos/aviones.pickle", "rb") as archivo:
         aviones = pickle.load(archivo)
         return aviones
-def leer_funcionario():
-     with open("archivos/funcionario.pickle", "rb") as archivo:
-        funcionario = pickle.load(archivo)
-        return funcionario
+
 def leer_tiquetes():
      with open("archivos/tiquetes.pickle", "rb") as archivo:
         tiquetes= pickle.load(archivo)
@@ -44,10 +36,7 @@ def leer_usuarios():
      with open("archivos/usuario.pickle", "rb") as archivo:
         usuario= pickle.load(archivo)
         return usuario
-def leer_pilotos():
-        with open("archivos/pilotos.pickle", "rb") as archivo:
-            pilotos= pickle.load(archivo)
-            return pilotos
+
 def leer_vuelos():
         with open("archivos/vuelos.pickle", "rb") as archivo:
             vuelos = pickle.load(archivo)
@@ -138,19 +127,6 @@ def registrar_usuarios(usuarios,identificacion,nombre,celular,correo,contrasena,
     registra_usuario(usuarios)
     #mostrar(usuarios)
 
-def registrar_funcionario(funcionario,identificacion,nombre,edad,celular,correo,contrasena,funcion):
-    if os.path.exists("archivos/funcionario.pickle"): ### reviso si el archivo esta creado para obtener los datos
-        funcionario=leer_funcionario()        
-    funcionari= clases.Tripulacion(identificacion,nombre,edad,celular,correo,contrasena,funcion)
-    funcionario.append(funcionari)
-    registra_funcionario(funcionario)
-
-def registrar_piloto(piloto,identificacion,nombre,celular,edad,correo,contrasena,rango,licencia,hora_vuelo):
-    if os.path.exists("archivos/pilotos.pickle"): ### reviso si el archivo esta creado para obtener los datos
-        piloto=leer_pilotos()     
-    pilot= clases.Piloto(identificacion,nombre,celular,correo,contrasena,edad,licencia,rango,hora_vuelo)
-    piloto.append(pilot)
-    registra_pilotos(piloto)
 
 def registrar_vuelos(vuelos,codigo,tipo_vuelo,tipo_tarifa,origen,destino,fecha,hora_ida,hora_llegada,valor_vuelo):
     if os.path.exists("archivos/vuelos.pickle"): ### reviso si el archivo esta creado para obtener los datos
@@ -210,54 +186,6 @@ def verificar_ingreso_usuario(usuarios,identificacion,contraseña):
             return False
             break
             
-##----------verificar funcionario--------
-def verificar_ingreso_funcionario(funcionario,identificacion,contraseña):
-    if os.path.exists("archivos/funcionario.pickle"): ### reviso si el archivo esta creado para obtener los datos
-        funcionario=leer_funcionario()
-    ver=True
-    while ver:
-        cant_funcionario=len(funcionario)
-        con_funcionario=0
-        if cant_funcionario>0:
-            for c in funcionario:
-                if c.identifica==identificacion and contraseña==c.contrasena:
-                    ver=False
-                    return True
-                    break
-                con_funcionario+=1
-                if con_funcionario==cant_funcionario:
-                    print("La identificacion o contraseña erronea")
-                    return False
-                    break
-        else:
-            print("No hay funcionario registrados")
-            return False
-            break
-
-##----------verificar piloto--------
-def verificar_ingreso_piloto(piloto,identificacion,contraseña):
-    if os.path.exists("archivos/pilotos.pickle"): ### reviso si el archivo esta creado para obtener los datos
-        piloto=leer_pilotos()
-    ver=True
-    while ver:
-        cant_piloto=len(piloto)
-        con_piloto=0
-        if cant_piloto>0:
-            for c in piloto:
-                if c.identifica==identificacion and contraseña==c.contrasena:
-                    ver=False
-                    return True
-                    break
-                con_piloto+=1
-                if con_piloto==cant_piloto:
-                    print("La identificacion o contraseña erronea")
-                    return False
-                    break
-        else:
-            print("No hay piloto registrados")
-            return False
-            break
-
 
 def listarVuelosApi():
     vuelosFile = leer_vuelos()
