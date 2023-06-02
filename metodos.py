@@ -65,12 +65,14 @@ def verificar_matricula(aviones,matricula):
             for m in aviones:
                 if m.matricula==matricula:
                     print("La matricula ya existe")
-                    break
+                    return False
                 con_avi+=1
                 if con_avi==cant_aviones:
                     ver=False
+                    return True
         else:
             ver=False
+            return True
             
     return matricula
 def verificar_identificacion(usuarios,cedula):
@@ -92,7 +94,7 @@ def verificar_identificacion(usuarios,cedula):
                     return True
         else:
             ver=False
-            return False
+            return True
             
 def verificar_vuelo(vuelos,codigo):
     if os.path.exists("archivos/vuelos.pickle"): ### reviso si el archivo esta creado para obtener los datos
@@ -104,19 +106,21 @@ def verificar_vuelo(vuelos,codigo):
         con_vuelo=0
         if cant_vuelos>0:
             for c in vuelos:
-                if c.codigo==codigo:
+                if c.numero_vuelo==codigo:
                     print("El codigo ya existe")
-                    break
+                    return False
                 con_vuelo+=1
                 if con_vuelo==cant_vuelos:
                     ver=False
+                    return True
         else:
             ver=False
+            return True
             
     return codigo
 
 
-
+#------------registrar ----------------
 def registrar_aviones(aviones,matricula,modelo,marca,anio,aerolinea,horas_vuelo,capacida_silla):
     if os.path.exists("archivos/aviones.pickle"): ### reviso si el archivo esta creado para obtener los datos
         aviones=leer_aviones()
@@ -154,8 +158,18 @@ def registrar_vuelos(vuelos,codigo,tipo_vuelo,tipo_tarifa,origen,destino,fecha,h
     vuelo= clases.Vuelo(codigo,tipo_vuelo,tipo_tarifa,valor_vuelo,origen,destino,fecha,hora_ida,hora_llegada)
     vuelos.append(vuelo)
     registra_vuelos(vuelos)
-
-
+    
+def registrar_tiquetes(tiquetes,codigo,tipo_vuelo,tipo_tarifa,tipo_valor,c_origen,c_destino,fecha,hora_ida,hora_llegada,identificacion,nombre,celular,correo,valor,silla)  :
+    if os.path.exists("archivos/tiquetes.pickle"): ### reviso si el archivo esta creado para obtener los datos
+        tiquetes=leer_vuelos()
+    valor=tipo_valor
+    tiquete= clases.tiquete(codigo,tipo_vuelo,tipo_tarifa,tipo_valor,c_origen,c_destino,fecha,hora_ida,hora_llegada,identificacion,nombre,celular,correo,valor,silla)     
+    tiquete.activar_equipa_bodega()
+    tiquetes.append(tiquete)
+    registra_tiquetes(tiquetes)
+    
+def registrar_tripulante_vuelo():
+   pass 
 ##---consultar vuelos----
 def consultar_vuelos(vuelos,c_origen,c_destino,fecha):
     if os.path.exists("archivos/vuelos.pickle"): ### reviso si el archivo esta creado para obtener los datos
@@ -169,8 +183,7 @@ def consultar_vuelos(vuelos,c_origen,c_destino,fecha):
         if cant_vuelos==cont_vuelos:
             return False
 
-def registrar_tiquetes(tiquetes,codigo,tipo_vuelo,tipo_tarifa,c_origen,c_destino,fecha,hora_ida,hora_llegada)  :
-    pass     
+
 ##----------verificar usuario--------
 def verificar_ingreso_usuario(usuarios,identificacion,contraseña):
     if os.path.exists("archivos/usuario.pickle"): ### reviso si el archivo esta creado para obtener los datos
