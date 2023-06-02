@@ -19,21 +19,7 @@ class persona:
     def mostrar(self):
         print("Identificacion: ",self.identifica)
         print("Nombre: ",self.nombre)
-        print("Celular: ",self.celular)
-
-class Piloto(persona):
-    def __init__(self,identifica,nombre,celular,correo,contrasena,edad,licencia,rango,horas_vuelo):
-        super().__init__(identifica,nombre,celular,correo,contrasena)
-        self.licencia=licencia
-        self.edad=edad
-        self.rango=rango
-        self.horas_vuelo=horas_vuelo
-    def mostrar(self):
-        super().mostrar()
-        print("Licencia: ",self.licencia)
-        print("Rango: ",self.rango)
-        print("Horas de vuelo: ",self.horas_vuelo)
-
+        print("Correo: ",self.correo)
 
 class Pasajero(persona):
     def __init__(self,identifica,nombre,celular,correo,contrasena,numero_millas):
@@ -44,15 +30,6 @@ class Pasajero(persona):
         super().mostrar()
         print("Numero de millas: ",self.numero_millas)
 
-class Tripulacion(persona):
-    def __init__(self,identifica,nombre,celular,correo,contrasena,edad,funcion):
-        super().__init__(identifica,nombre,celular,correo,contrasena)
-        
-        self.edad=edad
-        self.funcion=funcion
-    def mostrar(self):
-        super().mostrar()
-        print("Funcion: ",self.funcion)
 
 
 class Avion:
@@ -83,7 +60,7 @@ class Vuelo:
         self.hora_ida=hora_ida
         self.hora_llegada=hora_llegada
         self.tipo_vuelo=tipo_vuelo
-        self.tipo_valor= [100, 400]
+        self.precio_vuelo= [100, 400]
         self.matricula_avion = None
         self.identifica_piloto=None
         self.identifica_tripulacion=[]
@@ -108,7 +85,12 @@ class tiquete(Vuelo):
         else:
             self.equipaje_bodega=False
             
-    
+class pago():
+    def __init__(self,numero_tarjeta,fecha_vencimiento,codigo_seguridad):
+        self.numero_tarjeta=numero_tarjeta
+        self.fecha_vencimiento=fecha_vencimiento
+        self.codigo_seguridad=codigo_seguridad
+
         
         
         
