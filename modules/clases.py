@@ -85,7 +85,12 @@ class tiquete(Vuelo):
         else:
             self.equipaje_bodega=False
             
-    
+class pago():
+    def __init__(self,numero_tarjeta,fecha_vencimiento,codigo_seguridad):
+        self.numero_tarjeta=numero_tarjeta
+        self.fecha_vencimiento=fecha_vencimiento
+        self.codigo_seguridad=codigo_seguridad
+
         
         
         

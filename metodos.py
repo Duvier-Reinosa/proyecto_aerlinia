@@ -175,16 +175,16 @@ def verificar_ingreso_usuario(usuarios,identificacion,contraseña):
                 if c.identifica==identificacion and contraseña==c.contrasena:
                     ver=False
                     return True
-                    break
+                    
                 con_usu+=1
                 if con_usu==cant_usuarios:
                     print("La identificacion o contraseña erronea")
                     return False
-                    break
+                    
         else:
             print("No hay usuarios registrados")
-            return False
-            break
+            return True
+            
             
 
 def listarVuelosApi():
