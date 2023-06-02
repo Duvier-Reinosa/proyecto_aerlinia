@@ -198,7 +198,7 @@ def listarVuelosApi():
             "horaSalida": vuelo.hora_ida,
             "horaLlegada": vuelo.hora_llegada,
             "tipoVuelo": vuelo.tipo_vuelo,
-            "precio": vuelo.tipo_valor
+            "precio": vuelo.precio_vuelo,
         })
     return json.dumps(vuelos)
 
