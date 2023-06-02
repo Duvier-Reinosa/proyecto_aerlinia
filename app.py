@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request
 import os
-from metodos import listarVuelosApi, listarMatriculasAvion, registrar_vuelos, registrar_aviones
+from metodos import listarVuelosApi, listarMatriculasAvion, registrar_vuelos, registrar_aviones,registrar_usuarios
 
 app = Flask(__name__)
 
@@ -26,7 +26,7 @@ def misVuelos():
 def pagar():
     return render_template('vistas/pagar.html')
 
-# vistas dashboard--------------------------------------------------------
+# vistas dashboard<--------------------------------------------------------
 
 @app.route('/dashboard/home')
 def homeDashboard():
@@ -37,9 +37,16 @@ def homeDashboard():
 def agregarVuelo():
     return render_template('dashboard/agregarVuelo.html')
 
+@app.route('/dashboard/agregarUsuario')
+def agregarUsuario():
+    return render_template('dashboard/agregarUsuario.html')
+
 @app.route('/dashboard/agregarAvion')
 def agregarAvion():
     return render_template('dashboard/agregarAvion.html')
+
+
+
 
 # api /backend------------------------------------------------------------
 
@@ -84,7 +91,17 @@ def agregarAvionApi():
             return {"status": "success"}
     else:
         return []
-    
+@app.route('/api/dashboard/agregarUsuario', methods=['POST'])
+def agregarUsuarioApi():
+    if request.method == 'POST':
+        data = request.get_json() 
+        print(data)
+        # agregar metodo para obtener los vuelos, se pueden guardar en un archivo de texto hacer un metodo en el archivo metodos para obtener los vuelos
+        returned =  registrar_usuarios([], data["identificacion"], data["nombre"], data["celular"], data["correo"], data["contrasena"],0)
+        if returned:
+            return {"status": "success"}
+    else:
+        return []
 
 if __name__ == '__main__':
     app.run()

@@ -126,9 +126,12 @@ def registrar_aviones(aviones,matricula,modelo,marca,anio,aerolinea,horas_vuelo,
 def registrar_usuarios(usuarios,identificacion,nombre,celular,correo,contrasena,millas):
     if os.path.exists("archivos/usuario.pickle"): ### reviso si el archivo esta creado para obtener los datos
         usuarios=leer_usuarios()
-    usuario= clases.Pasajero(identificacion,nombre,celular,correo,contrasena,millas)
-    usuarios.append(usuario)
-    registra_usuario(usuarios)
+    usu=verificar_identificacion(usuarios,identificacion)
+    if usu:
+        usuario= clases.Pasajero(identificacion,nombre,celular,correo,contrasena,millas)
+        usuarios.append(usuario)
+        registra_usuario(usuarios)
+    return True
     #mostrar(usuarios)
 
 
