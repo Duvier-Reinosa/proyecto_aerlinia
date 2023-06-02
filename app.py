@@ -7,7 +7,7 @@ app = Flask(__name__)
 app.static_folder = 'static'
 app.static_url_path = '/static'
 
-
+# vistas
 
 @app.route('/')
 def index():
@@ -25,6 +25,13 @@ def misVuelos():
 @app.route('/pagar')
 def pagar():
     return render_template('vistas/pagar.html')
+
+# vistas dashboard
+@app.route('/dashboard/agregarVuelo')
+def agregarVuelo():
+    return render_template('dashboard/agregarVuelo.html')
+
+# api
 
 @app.route('/listaVuelos', methods=['GET'])
 def login():
