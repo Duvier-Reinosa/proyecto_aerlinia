@@ -48,7 +48,6 @@
             })
                 .then(response => response.json())
                 .then(data => {
-                    console.log(data.status)
                     if (data.status==="success") {
                         alert("Inicio de sesión exitoso");
                         window.location.href = "misVuelos"
