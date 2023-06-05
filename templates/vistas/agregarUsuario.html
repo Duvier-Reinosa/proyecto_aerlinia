@@ -15,6 +15,7 @@
             event.preventDefault();
           }
         }
+  
       </script>
 </head>
 <body>
@@ -33,7 +34,7 @@
             <input placeholder="Correo" type="email"  required>
             <label for="origen">Contraseña</label>
             <input placeholder="Contrasena" type="password" minlength="6" required >
-            <button type="submit">Registrases</button>
+            <button type="submit" onclick="limpiarFormulario()">Registrases</button>
         </form>
         <p>Ingresa a tu cuenta <a href="iniciarSecion">Inciar seción</a></p>
     </div>
@@ -60,6 +61,7 @@
                 .then(data => {
                     if (data.status==="success") {
                         alert("Agregado correctamente");
+                        document.getElementById("form").reset();
                         
                       } else {
                         alert("Usuario no registrado");
