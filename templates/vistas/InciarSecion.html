@@ -39,7 +39,7 @@
             }
             console.log({event, dataToSend})
         
-            fetch('/api/dashboard/iniciarSecion', {
+            fetch('/api/iniciarSecion', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -48,15 +48,21 @@
             })
                 .then(response => response.json())
                 .then(data => {
+                    console.log(data.status)
+                    if (data.status==="success") {
+                        alert("Inicio de sesión exitoso");
+                        window.location.href = "misVuelos"
+                      } else {
+                        alert("Nombre de usuario o contraseña incorrectos");
+                      }
                     // Maneja la respuesta obtenida del endpoint después de hacer el POST
-                    console.log(data);
-                    form.reset()
                 })
                 .catch(error => {
                     // Maneja el error en caso de que la solicitud falle
                     console.log(error);
                 });
         });
+        
         
     </script>
 </body>

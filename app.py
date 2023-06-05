@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, jsonify
 import os
 from metodos import listarVuelosApi, listarMatriculasAvion, registrar_vuelos, registrar_aviones,registrar_usuarios,verificar_ingreso_usuario
 
@@ -116,9 +116,13 @@ def iniciarSecionApi():
         print(data)
         # agregar metodo para obtener los vuelos, se pueden guardar en un archivo de texto hacer un metodo en el archivo metodos para obtener los vuelos
         returned =  verificar_ingreso_usuario([], data["identificacion"],data["contrasena"])
+        print(returned)
         if returned:
-            return {"status": "success"}
+            response = {"status": "success"}
+        else:
+            response = {"status": "error"}
+        return jsonify(response)
     else:
-        return []
+        return jsonify({"status": "error"})
 if __name__ == '__main__':
     app.run()
