@@ -105,9 +105,12 @@ def agregarUsuarioApi():
         # agregar metodo para obtener los vuelos, se pueden guardar en un archivo de texto hacer un metodo en el archivo metodos para obtener los vuelos
         returned =  registrar_usuarios([], data["identificacion"], data["nombre"], data["celular"], data["correo"], data["contrasena"],0)
         if returned:
-            return {"status": "success"}
+            response = {"status": "success"}
+        else:
+            response = {"status": "error"}
+        return jsonify(response)
     else:
-        return []
+        return jsonify({"status": "error"})
     
 @app.route('/api/iniciarSecion', methods=['POST'])    
 def iniciarSecionApi():

@@ -58,9 +58,13 @@
             })
                 .then(response => response.json())
                 .then(data => {
+                    if (data.status==="success") {
+                        alert("Agregado correctamente");
+                        
+                      } else {
+                        alert("Usuario no registrado");
+                      }
                     // Maneja la respuesta obtenida del endpoint después de hacer el POST
-                    console.log(data);
-                    form.reset()
                 })
                 .catch(error => {
                     // Maneja el error en caso de que la solicitud falle
