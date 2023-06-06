@@ -51,7 +51,7 @@ class Avion:
         print("Horas de vuelo: ",self.horas_vuelo)
 
 class Vuelo:
-    def __init__(self,numero_vuelo,tipo_vuelo,tipo_tarifa,origen,destino,fecha_ida,hora_ida,hora_llegada):
+    def __init__(self,numero_vuelo,tipo_vuelo,tipo_tarifa,origen,destino,fecha_ida,hora_ida,hora_llegada,capacidad_silla):
         self.numero_vuelo=numero_vuelo
         self.origen=origen
         self.tipo_tarifa=tipo_tarifa
@@ -64,9 +64,27 @@ class Vuelo:
         self.matricula_avion = None
         self.identifica_piloto=None
         self.identifica_tripulacion=[]
+        self.capacidad_silla = capacidad_silla
+        self.sillas_turista = 0
+        self.sillas_ejecutiva = 0
     def valor_tiquete(self):
         if self.tipo_tarifa=="viajero":
-            self.valor=500    
+            self.valor=500
+    def set_capacidad(self):
+        self.sillas_turista = self.capacidad_silla * 0.8
+        self.sillas_ejecutiva = self.capacidad_silla * 0.2
+    def vender_tiquete_turista(self):
+        if self.sillas_turista > 0:
+            self.sillas_turista -= 1
+            return True
+        else:
+            return False
+    def vender_tiquete_ejecutivo(self):
+        if self.sillas_ejecutiva > 0:
+            self.sillas_ejecutiva -= 1
+            return True
+        else:
+            return False    
 
 class tiquete(Vuelo):
     def __init__(self, numero_vuelo, tipo_vuelo,tipo_tarifa,tipo_valor, origen, destino, fecha_ida, hora_ida, hora_llegada,identificacion,nombre,celular,correo,valor,silla):

@@ -36,6 +36,11 @@
                     <img src="{{ url_for('static', filename='assets/ventanaavion.avif') }}" alt="">
                     <div class="overlay"></div>
                 </div>
+                <div class="cardBody" style="margin-top: 20px;">
+                    <p class="yellowMarker" id="fechaVuelo">Fecha de vuelo: </p>
+                    <p id="horaSalida">Salida: </p>
+                    <p class="redMarker" id="horaLlegada">Llegada: </p>
+                </div>
             </div>
             <div class="clases">
                 <div class="clase">
@@ -80,6 +85,15 @@
                 .then(data => {
                     let origenDestino = document.getElementById('origenDestino');
                     origenDestino.innerHTML = `${data.origen} - ${data.destino}`;
+
+                    let fechaVuelo = document.getElementById('fechaVuelo');
+                    fechaVuelo.innerHTML += `${data.fechaVuelo}`;
+
+                    let horaLlegada = document.getElementById('horaLlegada');
+                    horaLlegada.innerHTML += `${data.horaLlegada}`;
+
+                    let horaSalida = document.getElementById('horaSalida');
+                    horaSalida.innerHTML += `${data.horaSalida}`;
                     console.log(data);
                 });
         });
