@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, jsonify
 import os
 from metodos import listarVuelosApi, listarMatriculasAvion, registrar_vuelos, registrar_aviones,registrar_usuarios,verificar_ingreso_usuario
 
@@ -10,6 +10,10 @@ app.static_url_path = '/static'
 # vistas------------------------------------------------------------------
 
 @app.route('/')
+def loginUser():
+    return render_template('vistas/inciarSecion.html')
+
+@app.route('/home')
 def index():
     return render_template('vistas/index.html')
 
@@ -17,6 +21,14 @@ def index():
 def vuelo(id):
     print(id)
     return render_template('vistas/vuelo.html', id = id)
+
+@app.route('/agregarUsuario')
+def agregarUsuario():
+    return render_template('vistas/agregarUsuario.html')
+
+@app.route('/iniciarSecion')
+def iniciarSecion():
+    return render_template('vistas/inciarSecion.html')
 
 @app.route('/misVuelos')
 def misVuelos():
@@ -32,17 +44,11 @@ def pagar():
 def homeDashboard():
     return render_template('dashboard/home.html')
 
-@app.route('/dashboard/iniciarSecion')
-def iniciarSecion():
-    return render_template('dashboard/inciarSecion.html')
 
 @app.route('/dashboard/agregarVuelo')
 def agregarVuelo():
     return render_template('dashboard/agregarVuelo.html')
 
-@app.route('/dashboard/agregarUsuario')
-def agregarUsuario():
-    return render_template('dashboard/agregarUsuario.html')
 
 @app.route('/dashboard/agregarAvion')
 def agregarAvion():
@@ -95,7 +101,7 @@ def agregarAvionApi():
     else:
         return []
     
-@app.route('/api/dashboard/agregarUsuario', methods=['POST'])
+@app.route('/api/agregarUsuario', methods=['POST'])
 def agregarUsuarioApi():
     if request.method == 'POST':
         data = request.get_json() 
@@ -103,20 +109,27 @@ def agregarUsuarioApi():
         # agregar metodo para obtener los vuelos, se pueden guardar en un archivo de texto hacer un metodo en el archivo metodos para obtener los vuelos
         returned =  registrar_usuarios([], data["identificacion"], data["nombre"], data["celular"], data["correo"], data["contrasena"],0)
         if returned:
-            return {"status": "success"}
+            response = {"status": "success"}
+        else:
+            response = {"status": "error"}
+        return jsonify(response)
     else:
-        return []
+        return jsonify({"status": "error"})
     
-@app.route('/api/dashboard/iniciarSecion', methods=['POST'])    
+@app.route('/api/iniciarSecion', methods=['POST'])    
 def iniciarSecionApi():
     if request.method == 'POST':
         data = request.get_json() 
         print(data)
         # agregar metodo para obtener los vuelos, se pueden guardar en un archivo de texto hacer un metodo en el archivo metodos para obtener los vuelos
         returned =  verificar_ingreso_usuario([], data["identificacion"],data["contrasena"])
+        print(returned)
         if returned:
-            return {"status": "success"}
+            response = {"status": "success"}
+        else:
+            response = {"status": "error"}
+        return jsonify(response)
     else:
-        return []
+        return jsonify({"status": "error"})
 if __name__ == '__main__':
     app.run()

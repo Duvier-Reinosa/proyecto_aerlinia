@@ -24,6 +24,24 @@ li {
     list-style: none;
 }
 
+.subNav{
+    display: flex;
+    height: 100%;
+    align-items: center;
+}
+
+.closeSesion{
+    height: 35px;
+    width: 100px;
+    border: #1d1d1d solid 2px;
+    font-size: 12px;
+    font-weight: 600;
+    background: #fff;
+    border-radius: 25px;
+    margin-left: 10px;
+    cursor: pointer;
+}
+
 li a{
     text-decoration: none;
     color: #1d1d1d;

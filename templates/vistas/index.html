@@ -14,8 +14,10 @@
     <header>
         <nav>
             <ul>
-                <li><a href="./"><img src="{{ url_for('static', filename='assets/logo.png') }}" alt=""></a></li>
-                <li><a href="misVuelos">Mis vuelos</a></li>
+                <li><a href="home"><img src="{{ url_for('static', filename='assets/logo.png') }}" alt=""></a></li>
+                <div class="subNav" id="subNav">
+                    <li><a href="misVuelos">Mis vuelos</a></li>
+                </div>
             </ul>
         </nav>
     </header>
@@ -27,8 +29,22 @@
     </div>
     <script>
         let containerVuelos = document.getElementById('containerVuelos');
+        let closeSesionButton;
         document.addEventListener('DOMContentLoaded', function() {
-            fetch('/api/listaVuelos')  // Reemplaza con la ruta de tu endpoint Flask
+            const user = JSON.parse(localStorage.getItem('user'));//obtiene el usuario si está logueado
+            if (user) {
+                let div = document.getElementById('subNav');
+                div.innerHTML += `<button class="closeSesion" id="closeSesion">Cerrar sesión</button>`; // si está logueado agrega el botón de cerrar sesión
+                
+                closeSesionButton = document.getElementById('closeSesion');
+                closeSesionButton.addEventListener('click', function() {
+                    localStorage.removeItem('user');
+                    window.location.href = '/';
+                });
+            } else {
+                window.location.href = '/'; // si no está logueado lo redirige al login
+            }
+            fetch('/api/listaVuelos')  // pide la lista de vuelos
                 .then(response => response.json())
                 .then(vuelos => {
                     // Manipula la respuesta obtenida del endpoint

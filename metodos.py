@@ -177,14 +177,12 @@ def verificar_ingreso_usuario(usuarios,identificacion,contraseña):
         usuarios=leer_usuarios()
     ver=True
     while ver:
-        identificacion=input("Digite la identificacion: ")
-        contraseña=input("contraseña ")
         cant_usuarios=len(usuarios)
         con_usu=0
         if cant_usuarios>0:
             for c in usuarios:
                 if c.identifica==identificacion and contraseña==c.contrasena:
-                    ver=False
+                    #ver=False
                     return True
                     
                 con_usu+=1
@@ -226,7 +224,7 @@ def listarMatriculasAvion():
 
 ##----------verificar vuelos  programados---
 
-
+#print(verificar_ingreso_usuario([],"11118201113","Aa990201456123"))
 # registrar_vuelos([],"1","comercial",["viajero","preferencia","premium"],"perira","cali","15-7-2023","13:00","15:00",[200.000,300.000,400,000])
 # registrar_piloto([],"11182","carlo angola","31233564","25","agola@sa.com","32545","comandante","32sa","300")
 #registrar_funcionario([],None,None,None,None,None,None,None)
