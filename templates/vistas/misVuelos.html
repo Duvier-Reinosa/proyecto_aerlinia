@@ -22,6 +22,12 @@
         </nav>
     </header>
 
+    <div class="container">
+        <h2 style="margin: 0;">Mis vuelos</h2>
+        <div class="misVuelosContainer" id="misVuelosContainer">
+        </div>
+    </div>
+
     <script>
         let closeSesionButton;
         document.addEventListener('DOMContentLoaded', function() {
@@ -39,6 +45,26 @@
             } else {
                 window.location.href = '/'; // si no está logueado lo redirige al login
             }
+
+            // obetener mis vuelos
+            let misVuelosContainer = document.getElementById('misVuelosContainer');
+            fetch(`/api/listTiquetesForUser/${user.identificacion}`)
+                .then(response => response.json())
+                .then(data => {
+                    data.forEach(d => {
+                        misVuelosContainer.innerHTML += `
+                        <div class="vuelo">
+                            <p id="ciudades">${d.origen} - ${d.destino}</p>
+                            <p id="numeroVuelo">Vuelo: ${d.numero_vuelo}</p>
+                            <p id="clase">Clase: ${d.silla}</p>
+                            <p id="valor">Valor: ${d.valor}</p>
+                            <p id="fechaSalida">Fecha salida: ${d.fecha_id}</p>
+                            <p id="horaSalida">Hora salida: ${d.hora_ida}</p>
+                            <p id="horaLlegada">Hora llegada: ${d.hora_llegada}</p>
+                        </div>
+                        `;
+                    });
+                })
         });
     </script>
     

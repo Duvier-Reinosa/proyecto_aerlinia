@@ -286,16 +286,25 @@ def pagarTiquete(data):
             vueloSingle.vender_tiquete_ejecutivo()
         else:
             vueloSingle.vender_tiquete_turista()
-                                #   numero_vuelo,               tipo_vuelo,   tipo_tarifa,             tipo_valor,         origen,          destino,              fecha_ida,        hora_ida,             hora_llegada,             identificacion,                 nombre,        celular,          correo,        valor,           silla,              capacidad_silla
         tiquete = clases.Tiquete(data['numeroVuelo'], vueloSingle.tipo_vuelo, vueloSingle.tipo_tarifa, data['claseVuelo'], vuelo['origen'], vuelo['destino'], vueloSingle.fecha_ida, vueloSingle.hora_ida, vueloSingle.hora_llegada, data['identificacionUsuario'], user['nombre'], user['celular'], user['correo'], data['precio'], data['claseVuelo'], vuelo['capacidadSillas'])
         pago = clases.Pago(data['numeroTarjeta'])
         pago.setTiquete(tiquete)
         pago.setIdentificacionUsuario(data['identificacionUsuario'])
         tiquetesFile.append(tiquete)
+        registar_tiquetes(tiquetesFile)
+        newVuelos.append(vueloSingle)
+        registra_vuelos(newVuelos)
+        pagosFile.append(pago)
+        registrar_pagos(pagosFile)
+        return True
+    else:
+        return False
 
-    registar_tiquetes(tiquetesFile)
-    newVuelos.append(vueloSingle)
-    registra_vuelos(newVuelos)
-    pagosFile.append(pago)
-    registrar_pagos(pagosFile)
-    return True
+
+def listTiquetesForUser(id):
+    tiquetesFile = leer_tiquetes()
+    tiquetes = []
+    for tiquete in tiquetesFile:
+        if tiquete.identificacion == id:
+            tiquetes.append(tiquete.showData())
+    return json.dumps(tiquetes)

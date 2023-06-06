@@ -97,7 +97,12 @@
                     }
                 }).then(response => response.json())
                 .then(data => {
-                    console.log(data)
+                    if (data.status == 'success') {
+                        alert('Tiquete comprado con éxito');
+                        window.location.href = '/misVuelos';
+                    } else {
+                        alert('Error al comprar el tiquete');
+                    }
                 })
             })
         });

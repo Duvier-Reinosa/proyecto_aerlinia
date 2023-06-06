@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, jsonify
 import os
-from metodos import listarVuelosApi, listarMatriculasAvion, registrar_vuelos, registrar_aviones,registrar_usuarios,verificar_ingreso_usuario, listOneVuelo, getUser, pagarTiquete
+from metodos import listarVuelosApi, listarMatriculasAvion, registrar_vuelos, registrar_aviones,registrar_usuarios,verificar_ingreso_usuario, listOneVuelo, getUser, pagarTiquete, listTiquetesForUser
 
 app = Flask(__name__)
 
@@ -94,6 +94,14 @@ def pagaTiquete():
         if response:
             return {"status": "success"}
         return {"status": "Failed"}
+    else:
+        return []
+
+@app.route('/api/listTiquetesForUser/<id>', methods=['GET'])
+def lisTiquetesUSer(id):
+    if request.method == 'GET':
+        # agregar metodo para obtener los vuelos, se pueden guardar en un archivo de texto hacer un metodo en el archivo metodos para obtener los vuelos
+        return listTiquetesForUser(id)
     else:
         return []
     
