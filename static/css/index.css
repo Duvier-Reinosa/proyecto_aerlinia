@@ -164,13 +164,20 @@ li a img{
     opacity: 481%;
     border-radius: 25px;
 }
-.imgTitleContainer h2{
+
+#origenContainer{
     position: absolute;
     /* margin: auto; */
     top: 280px;
-    left: 22%;
-    color: #fff;
     z-index: 11;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 46%;
+}
+
+.imgTitleContainer h2{
+    color: #fff;
 }
 .overlay {
     position: relative;

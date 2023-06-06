@@ -194,7 +194,21 @@ def verificar_ingreso_usuario(usuarios,identificacion,contraseña):
             print("No hay usuarios registrados")
             return False
             
-            
+def listOneVuelo(numeroVuelo):
+    vuelosFile = leer_vuelos()
+    for vuelo in vuelosFile:
+        if vuelo.numero_vuelo == numeroVuelo:
+            return {
+                "origen": vuelo.origen,
+                "destino": vuelo.destino,
+                "fechaVuelo": vuelo.fecha_ida,
+                "horaSalida": vuelo.hora_ida,
+                "horaLlegada": vuelo.hora_llegada,
+                "tipoVuelo": vuelo.tipo_vuelo,
+                "precio": vuelo.precio_vuelo,
+                "numeroVuelo": vuelo.numero_vuelo
+            }
+    return {}
 
 def listarVuelosApi():
     vuelosFile = leer_vuelos()
@@ -208,6 +222,7 @@ def listarVuelosApi():
             "horaLlegada": vuelo.hora_llegada,
             "tipoVuelo": vuelo.tipo_vuelo,
             "precio": vuelo.precio_vuelo,
+            "numeroVuelo": vuelo.numero_vuelo,
         })
     return json.dumps(vuelos)
 

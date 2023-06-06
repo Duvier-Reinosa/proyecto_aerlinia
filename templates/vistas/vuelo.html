@@ -15,8 +15,10 @@
     <header>
         <nav>
             <ul>
-                <li><a href="home"><img src="{{ url_for('static', filename='assets/logo.png') }}" alt=""></a></li>
-                <li><a href="misVuelos">Mis vuelos</a></li>
+                <li><a href="{{ url_for('index') }}"><img src="{{ url_for('static', filename='assets/logo.png') }}" alt=""></a></li>
+                <div class="subNav" id="subNav">
+                    <li><a href="{{ url_for('misVuelos') }}">Mis vuelos</a></li>
+                </div>
             </ul>
         </nav>
     </header>
@@ -28,7 +30,9 @@
                     <h1>Detalles del vuelo</h1>
                 </div>
                 <div class="imgTitleContainer">
-                    <h2>Pereira - Cartagena</h2>
+                    <div id="origenContainer">
+                        <h2 id="origenDestino"></h2>
+                    </div>
                     <img src="{{ url_for('static', filename='assets/ventanaavion.avif') }}" alt="">
                     <div class="overlay"></div>
                 </div>
@@ -49,6 +53,37 @@
             </div>
         </div>
     </div>
+
+    <script>
+        let closeSesionButton;
+        document.addEventListener('DOMContentLoaded', function() {
+            // valida si el usuario está logueado
+            const user = JSON.parse(localStorage.getItem('user'));//obtiene el usuario si está logueado
+            if (user) {
+                let div = document.getElementById('subNav');
+                div.innerHTML += `<button class="closeSesion" id="closeSesion">Cerrar sesión</button>`; // si está logueado agrega el botón de cerrar sesión
+                
+                closeSesionButton = document.getElementById('closeSesion');
+                closeSesionButton.addEventListener('click', function() {
+                    localStorage.removeItem('user');
+                    window.location.href = '/';
+                });
+            } else {
+                window.location.href = '/'; // si no está logueado lo redirige al login
+            }
+
+            // obtener información del vuelo
+            const idVuelo = window.location.pathname.split('/')[2]; //saca el id de la url
+
+            fetch(`/api/vuelo/${idVuelo}`)
+                .then(response => response.json())
+                .then(data => {
+                    let origenDestino = document.getElementById('origenDestino');
+                    origenDestino.innerHTML = `${data.origen} - ${data.destino}`;
+                    console.log(data);
+                });
+        });
+    </script>
     
 </body>
 </html>
