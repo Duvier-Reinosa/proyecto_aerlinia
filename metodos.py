@@ -139,10 +139,10 @@ def registrar_usuarios(usuarios,identificacion,nombre,celular,correo,contrasena,
     #mostrar(usuarios)
 
 
-def registrar_vuelos(vuelos,codigo,tipo_vuelo,tipo_tarifa,origen,destino,fecha,hora_ida,hora_llegada):
+def registrar_vuelos(vuelos,codigo,tipo_vuelo,tipo_tarifa,origen,destino,fecha,hora_ida,hora_llegada, capacidad_silla):
     if os.path.exists("archivos/vuelos.pickle"): ### reviso si el archivo esta creado para obtener los datos
         vuelos=leer_vuelos()
-    vuelo= clases.Vuelo(codigo,tipo_vuelo,tipo_tarifa,origen,destino,fecha,hora_ida,hora_llegada)
+    vuelo= clases.Vuelo(codigo, tipo_vuelo, tipo_tarifa, origen, destino, fecha, hora_ida, hora_llegada, capacidad_silla)
     vuelos.append(vuelo)
     registra_vuelos(vuelos)
     return True

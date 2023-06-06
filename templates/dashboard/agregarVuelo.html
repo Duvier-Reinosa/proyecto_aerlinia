@@ -69,6 +69,7 @@
                 <!-- <option value="privado">Privado</option>
                 <option value="comercial">Comercial</option> -->
             </select>
+            <input placeholder="Capacidad sillas" type="number" />
             <button type="submit">Agregar</button>
         </form>
     </div>
@@ -86,7 +87,8 @@
                 hora_ida: event.target[5].value,
                 hora_regreso: event.target[6].value,
                 tipo_vuelo: event.target[7].value,
-                matricula_avion: event.target[8].value
+                matricula_avion: event.target[8].value,
+                capacidad_sillas: event.target[9].value
             }
             console.log({event, dataToSend})
         

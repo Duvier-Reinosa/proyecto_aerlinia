@@ -83,7 +83,7 @@ def agregarVueloApi():
         data = request.get_json() 
         print(data)
         # agregar metodo para obtener los vuelos, se pueden guardar en un archivo de texto hacer un metodo en el archivo metodos para obtener los vuelos
-        returned =  registrar_vuelos([], data["numero_vuelo"], data["tipo_vuelo"],["turista","ejecutiva"], data["origen"], data["destino"], data["fecha_ida"], data["hora_ida"],data["hora_regreso"])
+        returned =  registrar_vuelos([], data["numero_vuelo"], data["tipo_vuelo"],["turista","ejecutiva"], data["origen"], data["destino"], data["fecha_ida"], data["hora_ida"],data["hora_regreso"], data["capacidad_sillas"])
         if returned:
             return {"status": "success"}
     else:
