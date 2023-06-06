@@ -1,5 +1,3 @@
-<!-- la idea de esta vista es escoger la clase del vuelo y ver los detalles del vuelo -->
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -48,11 +46,21 @@
                         <img src="{{ url_for('static', filename='assets/empresario.png') }}" alt="">
                         <h3>Clase ejecutiva</h1>
                     </div>
+                    <div class="cardBody" style="margin-top: 15px;">
+                        <p id="disponiblesEjecutiva">Disponibles: </p>
+                        <p class="redMarker" id="precioEjecutiva">Precio: </p>
+                        <button class="buyButton" onclick="window.location.href = '/pagar/{{id}}/ejecutiva'">Comprar</button>
+                    </div>
                 </div>
                 <div class="clase">
                     <div class="titleContainer">
                         <img src="{{ url_for('static', filename='assets/turista.png') }}" alt="">
                         <h3>Clase comercial</h1>
+                    </div>
+                    <div class="cardBody" style="margin-top: 15px;">
+                        <p id="disponiblesTurista">Disponibles: </p>
+                        <p class="yellowMarker" id="precioTurista">Precio: </p>
+                        <button class="buyButton" onclick="window.location.href = '/pagar/{{id}}/turista'">Comprar</button>
                     </div>
                 </div>
             </div>
@@ -93,7 +101,20 @@
                     horaLlegada.innerHTML += `${data.horaLlegada}`;
 
                     let horaSalida = document.getElementById('horaSalida');
-                    horaSalida.innerHTML += `${data.horaSalida}`;
+                    horaSalida.innerHTML += `${data.horaSalida} - Capcidad: ${data.capacidadSillas}`;
+
+                    let disponiblesEjecutiva = document.getElementById('disponiblesEjecutiva');
+                    disponiblesEjecutiva.innerHTML += ` ${data.sillasEjecutivas} sillas`;
+
+                    let disponiblesTurista = document.getElementById('disponiblesTurista');
+                    disponiblesTurista.innerHTML += ` ${data.sillasTuristas} sillas`;
+
+                    let precioEjecutiva = document.getElementById('precioEjecutiva');
+                    precioEjecutiva.innerHTML += ` $${data.precio[1]}`;
+
+                    let precioTurista = document.getElementById('precioTurista');
+                    precioTurista.innerHTML += ` $${data.precio[0]}`;
+
                     console.log(data);
                 });
         });

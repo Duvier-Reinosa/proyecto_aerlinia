@@ -1,23 +1,81 @@
-<!-- la idea de esta vista es pagar despúes de escoger la clase y re dirigir a mis vuelos -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pago</title>
+    <title>Pagar</title>
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
 </head>
 <body>
     <header>
         <nav>
             <ul>
-                <li><a href="home"><img src="{{ url_for('static', filename='assets/logo.png') }}" alt=""></a></li>
-                <li><a href="misVuelos">Mis vuelos</a></li>
+                <li><a href="{{ url_for('index') }}"><img src="{{ url_for('static', filename='assets/logo.png') }}" alt=""></a></li>
+                <div class="subNav" id="subNav">
+                    <li><a href="{{ url_for('misVuelos') }}">Mis vuelos</a></li>
+                </div>
             </ul>
         </nav>
+        <div class="container">
+            <div class="datosDecompra">
+                <h2>Detalles de compra</h2>
+                <p id="origen">Origen: </p>
+                <p id="destino">Destino: </p>
+                <p>Clase: {{clase}}</p>
+                <p id="pagarTotal">Valor a pagar: </p>
+            </div>
+            <div class="datosDecompra" style="margin-top: 20px;">
+                <h2>Datos de pago</h2>
+                <input placeholder="Numero de tarjeta" type="number">
+                <input placeholder="Código cvc" type="number">
+                <button id="pagarButton">Pagar</button>
+            </div>
+        </div>
     </header>
-    
+    <script>
+        let closeSesionButton;
+        const pagarButton = document.getElementById('pagarButton');
+        document.addEventListener('DOMContentLoaded', function() {
+            // valida si el usuario está logueado
+            const user = JSON.parse(localStorage.getItem('user'));//obtiene el usuario si está logueado
+            if (user) {
+                let div = document.getElementById('subNav');
+                div.innerHTML += `<button class="closeSesion" id="closeSesion">Cerrar sesión</button>`; // si está logueado agrega el botón de cerrar sesión
+                
+                closeSesionButton = document.getElementById('closeSesion');
+                closeSesionButton.addEventListener('click', function() {
+                    localStorage.removeItem('user');
+                    window.location.href = '/';
+                });
+            } else {
+                window.location.href = '/'; // si no está logueado lo redirige al login
+            }
+            // obtener información del vuelo
+            const idVuelo = window.location.pathname.split('/')[2]; //saca el id de la url
+            const clase = window.location.pathname.split('/')[3]; //saca la clase del tiquete a pagar
+            
+            fetch(`/api/vuelo/${idVuelo}`)
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+                let origen = document.getElementById('origen');
+                let destino = document.getElementById('destino');
+                let pagarTotal = document.getElementById('pagarTotal');
+                origen.innerHTML += data.origen;
+                destino.innerHTML += data.destino;
+                console.log({clase})
+
+                if (clase == 'turista') {
+                    pagarTotal.innerHTML += data.precio[0];
+                } else if (clase == 'ejecutiva') {
+                    pagarTotal.innerHTML += '$' + data.precio[1];
+                }
+
+            })
+        });
+    </script>
 </body>
 </html>

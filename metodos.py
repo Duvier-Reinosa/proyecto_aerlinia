@@ -142,7 +142,7 @@ def registrar_usuarios(usuarios,identificacion,nombre,celular,correo,contrasena,
 def registrar_vuelos(vuelos,codigo,tipo_vuelo,tipo_tarifa,origen,destino,fecha,hora_ida,hora_llegada, capacidad_silla):
     if os.path.exists("archivos/vuelos.pickle"): ### reviso si el archivo esta creado para obtener los datos
         vuelos=leer_vuelos()
-    vuelo = clases.Vuelo(codigo, tipo_vuelo, tipo_tarifa, origen, destino, fecha, hora_ida, hora_llegada, capacidad_silla)
+    vuelo = clases.Vuelo(codigo, tipo_vuelo, tipo_tarifa, origen, destino, fecha, hora_ida, hora_llegada, int(capacidad_silla))
     vuelo.set_capacidad()
     vuelos.append(vuelo)
     registra_vuelos(vuelos)
@@ -209,8 +209,8 @@ def listOneVuelo(numeroVuelo):
                 "precio": vuelo.precio_vuelo,
                 "numeroVuelo": vuelo.numero_vuelo,
                 "capacidadSillas": vuelo.capacidad_silla,
-                "sillasTuristas": vuelo.sillas_turistas,
-                "sillasEjecutivas": vuelo.sillas_ejecutivas,
+                "sillasTuristas": vuelo.sillas_turista,
+                "sillasEjecutivas": vuelo.sillas_ejecutiva,
             }
     return {}
 

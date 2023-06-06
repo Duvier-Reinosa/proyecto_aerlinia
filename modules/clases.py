@@ -7,8 +7,6 @@ class Aerolinea:
         return f"{self.nombre} - {self.pais}"
 
 
-
-
 class persona:
     def __init__(self,identifica,nombre,celular,correo,contrasena):
         self.identifica=identifica
@@ -86,7 +84,7 @@ class Vuelo:
         else:
             return False    
 
-class tiquete(Vuelo):
+class Tiquete(Vuelo):
     def __init__(self, numero_vuelo, tipo_vuelo,tipo_tarifa,tipo_valor, origen, destino, fecha_ida, hora_ida, hora_llegada,identificacion,nombre,celular,correo,valor,silla):
         Vuelo.__init__(numero_vuelo, tipo_vuelo,tipo_tarifa,tipo_valor, origen, destino, fecha_ida, hora_ida, hora_llegada)
         self.identificacion=identificacion
@@ -97,48 +95,42 @@ class tiquete(Vuelo):
         self.silla=silla
         self.equipaje_mano=True
         self.equipaje_bodega=None
-    def activar_equipa_bodega(self):
-        if self.tipo_tarifa=="preferencial" or self.tipo_tarifa=="premium":
-            self.equipaje_bodega=True
-        else:
-            self.equipaje_bodega=False
+    def showData(self):
+        return {
+            "numero_vuelo": self.numero_vuelo,
+            "tipo_vuelo": self.tipo_vuelo,
+            "tipo_tarifa": self.tipo_tarifa,
+            "tipo_valor": self.tipo_valor,
+            "origen": self.origen,
+            "destino": self.destino,
+            "fecha_ida": self.fecha_ida,
+            "hora_ida": self.hora_ida,
+            "hora_llegada": self.hora_llegada,
+            "identificacion": self.identificacion,
+            "nombre": self.nombre,
+            "celular": self.celular,
+            "correo": self.correo,
+            "valor": self.valor,
+            "silla": self.silla,
+            "equipaje_mano": self.equipaje_mano,
+            "equipaje_bodega": self.equipaje_bodega
+        }
             
-class pago():
-    def __init__(self,numero_tarjeta,fecha_vencimiento,codigo_seguridad):
+class Pago():
+    def __init__(self,numero_tarjeta):
         self.numero_tarjeta=numero_tarjeta
-        self.fecha_vencimiento=fecha_vencimiento
-        self.codigo_seguridad=codigo_seguridad
+        self.identificacionUsuario=None
+        self.tiquete = None
+    def setIdentificacionUsuario(self, identificacionUsuario):
+        self.identificacionUsuario = identificacionUsuario
+    def setTiquete(self, tiquete):
+        self.tiquete = tiquete
+    def showData(self):
+        return {
+            "numero_tarjeta": self.numero_tarjeta,
+            "identificacionUsuario": self.identificacionUsuario,
+            "tiquete": self.tiquete
+        }
 
-        
-        
-        
-
-    def mostrar(self):
-        print("Numero de vuelo: ",self.numero_vuelo)
-        print("Tipo de vuelo: ",self.tipo_vuelo)
-        print("Origen: ",self.origen)
-        print("Destino: ",self.destino)
-        print("Fecha: ",self.fecha_ida)
-        print("Hora: ",self.hora_ida)
-
-# class Vuelo_comercial(Vuelo):
-#     def __init__(self,numero_vuelo,tipo_vuelo,origen,destino,fecha_ida,fecha_regreso,hora_ida,hora_regreso,numero_pasajeros,precio):
-#         super().__init__(numero_vuelo,tipo_vuelo,origen,destino,fecha_ida,fecha_regreso,hora_ida,hora_regreso)
-#         self.numero_pasajeros=numero_pasajeros
-#         self.precio=precio
-#         self.capidad_equipaje=0
-#     def mostrar(self):
-#         super().mostrar()
-#         print("Numero de pasajeros: ",self.numero_pasajeros)
-
-
-# class Vuelo_privado(Vuelo):
-#     def __init__(self,numero_vuelo,tipo_vuelo,origen,destino,fecha_ida,fecha_regreso,hora_ida,hora_regreso,numero_pasajeros,precio):
-#         super().__init__(numero_vuelo,tipo_vuelo,origen,destino,fecha_ida,fecha_regreso,hora_ida,hora_regreso)
-#         self.numero_pasajeros=numero_pasajeros
-#         self.precio=precio
-#     def mostrar(self):
-#         super().mostrar()
-#         print("Numero de pasajeros: ",self.numero_pasajeros)
 
 

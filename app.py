@@ -34,9 +34,9 @@ def iniciarSecion():
 def misVuelos():
     return render_template('vistas/misVuelos.html')
 
-@app.route('/pagar')
-def pagar():
-    return render_template('vistas/pagar.html')
+@app.route('/pagar/<idVuelo>/<clase>')
+def pagar(idVuelo, clase):
+    return render_template('vistas/pagar.html', idVuelo = idVuelo, clase = clase)
 
 # vistas dashboard<--------------------------------------------------------
 
