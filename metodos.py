@@ -264,14 +264,3 @@ def getUser(id):
             return user.showData()
     return {}
 
-##----------verificar vuelos  programados---
-
-#print(verificar_ingreso_usuario([],"11118201113","Aa990201456123"))
-# registrar_vuelos([],"1","comercial",["viajero","preferencia","premium"],"perira","cali","15-7-2023","13:00","15:00",[200.000,300.000,400,000])
-# registrar_piloto([],"11182","carlo angola","31233564","25","agola@sa.com","32545","comandante","32sa","300")
-#registrar_funcionario([],None,None,None,None,None,None,None)
-#registrar_usuarios([],None,None,None,None,None,None)
-# print(consultar_vuelos([],"bogota","cali","12-6-2023"))
-# registrar_vuelos([],None,None,None,None,None,None,None,None)
-#print(verificar_ingreso_usuario([],None,None))
-#registrar_aviones([],None,None,None,None,None,None,None)
