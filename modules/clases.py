@@ -93,21 +93,21 @@ class Vuelo:
             return False    
 
 class Tiquete(Vuelo):
-    def __init__(self, numero_vuelo, tipo_vuelo,tipo_tarifa,tipo_valor, origen, destino, fecha_ida, hora_ida, hora_llegada,identificacion,nombre,celular,correo,valor,silla):
-        Vuelo.__init__(numero_vuelo, tipo_vuelo,tipo_tarifa,tipo_valor, origen, destino, fecha_ida, hora_ida, hora_llegada)
-        self.identificacion=identificacion
-        self.nombre=nombre
-        self.celular=celular
-        self.correo=correo
-        self.valor=valor
-        self.silla=silla
-        self.equipaje_mano=True
+    def __init__(self, numero_vuelo, tipo_vuelo, tipo_tarifa, tipo_valor, origen, destino, fecha_ida, hora_ida, hora_llegada, identificacion, nombre, celular, correo, valor, silla, capacidad_silla):
+        super().__init__(numero_vuelo, tipo_vuelo, tipo_tarifa, origen, destino, fecha_ida, hora_ida, hora_llegada, capacidad_silla)
+        self.identificacion = identificacion
+        self.nombre = nombre
+        self.celular = celular
+        self.correo = correo
+        self.valor = valor
+        self.silla = silla
+        self.equipaje_mano = True
+
     def showData(self):
         return {
             "numero_vuelo": self.numero_vuelo,
             "tipo_vuelo": self.tipo_vuelo,
             "tipo_tarifa": self.tipo_tarifa,
-            "tipo_valor": self.tipo_valor,
             "origen": self.origen,
             "destino": self.destino,
             "fecha_ida": self.fecha_ida,
@@ -121,6 +121,7 @@ class Tiquete(Vuelo):
             "silla": self.silla,
             "equipaje_mano": self.equipaje_mano,
         }
+
             
 class Pago():
     def __init__(self,numero_tarjeta):

@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, jsonify
 import os
-from metodos import listarVuelosApi, listarMatriculasAvion, registrar_vuelos, registrar_aviones,registrar_usuarios,verificar_ingreso_usuario, listOneVuelo, getUser
+from metodos import listarVuelosApi, listarMatriculasAvion, registrar_vuelos, registrar_aviones,registrar_usuarios,verificar_ingreso_usuario, listOneVuelo, getUser, pagarTiquete
 
 app = Flask(__name__)
 
@@ -83,6 +83,20 @@ def getOneUser(id):
     else:
         return []
     
+
+# metodo para pagar tiquete
+@app.route('/api/pagarTiquete', methods=['POST'])
+def pagaTiquete():
+    if request.method == 'POST':
+        data = request.get_json()
+        # metodo para pagar tiquete
+        response = pagarTiquete(data)
+        if response:
+            return {"status": "success"}
+        return {"status": "Failed"}
+    else:
+        return []
+    
 # api para dashboard------------------------------------------------------
 
 @app.route('/api/dashboard/agregarVuelo', methods=['POST'])
@@ -91,7 +105,7 @@ def agregarVueloApi():
         data = request.get_json() 
         print(data)
         # agregar metodo para obtener los vuelos, se pueden guardar en un archivo de texto hacer un metodo en el archivo metodos para obtener los vuelos
-        returned =  registrar_vuelos([], data["numero_vuelo"], data["tipo_vuelo"],["turista","ejecutiva"], data["origen"], data["destino"], data["fecha_ida"], data["hora_ida"],data["hora_regreso"], data["capacidad_sillas"])
+        returned =  registrar_vuelos([], data["numero_vuelo"], data["tipo_vuelo"],["turista","ejecutiva"], data["origen"], data["destino"], data["fecha_ida"], data["hora_ida"],data["hora_regreso"])
         if returned:
             return {"status": "success"}
     else:
@@ -144,5 +158,6 @@ def iniciarSecionApi():
         return jsonify(response)
     else:
         return jsonify({"status": "error"})
+
 if __name__ == '__main__':
     app.run()

@@ -50,7 +50,7 @@ def leer_vuelos():
             vuelos = pickle.load(archivo)
             return vuelos
         
-def leet_pagos():
+def leer_pagos():
         with open("archivos/pagos.pickle", "rb") as archivo:
             pagos = pickle.load(archivo)
             return pagos
@@ -229,6 +229,7 @@ def listOneVuelo(numeroVuelo):
                 "capacidadSillas": vuelo.capacidad_silla,
                 "sillasTuristas": vuelo.sillas_turista,
                 "sillasEjecutivas": vuelo.sillas_ejecutiva,
+                "tipoTarifa": vuelo.tipo_tarifa,
             }
     return {}
 
@@ -264,3 +265,37 @@ def getUser(id):
             return user.showData()
     return {}
 
+
+def pagarTiquete(data):
+    vuelo = listOneVuelo(data['numeroVuelo'])
+    vuelosFile = leer_vuelos()
+    tiquetesFile = leer_tiquetes()
+    pagosFile = leer_pagos()
+    newVuelos = []
+    vueloSingle = {}
+
+    for vuelo1 in vuelosFile:
+        if vuelo1.numero_vuelo == data['numeroVuelo']:
+            vueloSingle = vuelo1
+        else:
+            newVuelos.append(vuelo)
+
+    user = getUser(data["identificacionUsuario"])
+    if len(data['numeroTarjeta']) > 0:
+        if data['claseVuelo'] == 'ejecutiva':
+            vueloSingle.vender_tiquete_ejecutivo()
+        else:
+            vueloSingle.vender_tiquete_turista()
+                                #   numero_vuelo,               tipo_vuelo,   tipo_tarifa,             tipo_valor,         origen,          destino,              fecha_ida,        hora_ida,             hora_llegada,             identificacion,                 nombre,        celular,          correo,        valor,           silla,              capacidad_silla
+        tiquete = clases.Tiquete(data['numeroVuelo'], vueloSingle.tipo_vuelo, vueloSingle.tipo_tarifa, data['claseVuelo'], vuelo['origen'], vuelo['destino'], vueloSingle.fecha_ida, vueloSingle.hora_ida, vueloSingle.hora_llegada, data['identificacionUsuario'], user['nombre'], user['celular'], user['correo'], data['precio'], data['claseVuelo'], vuelo['capacidadSillas'])
+        pago = clases.Pago(data['numeroTarjeta'])
+        pago.setTiquete(tiquete)
+        pago.setIdentificacionUsuario(data['identificacionUsuario'])
+        tiquetesFile.append(tiquete)
+
+    registar_tiquetes(tiquetesFile)
+    newVuelos.append(vueloSingle)
+    registra_vuelos(newVuelos)
+    pagosFile.append(pago)
+    registrar_pagos(pagosFile)
+    return True

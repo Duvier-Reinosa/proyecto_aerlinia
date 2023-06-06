@@ -29,8 +29,8 @@
             </div>
             <div class="datosDecompra" style="margin-top: 20px;">
                 <h2>Datos de pago</h2>
-                <input placeholder="Numero de tarjeta" type="number">
-                <input placeholder="Código cvc" type="number">
+                <input placeholder="Numero de tarjeta" type="number" id="numeroTarjeta">
+                <input placeholder="Código cvc" type="number" id="cvc">
                 <button id="pagarButton">Pagar</button>
             </div>
         </div>
@@ -60,13 +60,11 @@
             fetch(`/api/vuelo/${idVuelo}`)
             .then(response => response.json())
             .then(data => {
-                console.log(data);
                 let origen = document.getElementById('origen');
                 let destino = document.getElementById('destino');
                 let pagarTotal = document.getElementById('pagarTotal');
                 origen.innerHTML += data.origen;
                 destino.innerHTML += data.destino;
-                console.log({clase})
 
                 if (clase == 'turista') {
                     pagarTotal.innerHTML += data.precio[0];
@@ -74,6 +72,33 @@
                     pagarTotal.innerHTML += '$' + data.precio[1];
                 }
 
+            })
+
+            let numeroTarjetaInput = document.getElementById('numeroTarjeta');
+            var numeroTarjeta = 0;
+            numeroTarjetaInput.addEventListener('input', function(event) {
+                numeroTarjeta = event.target.value;
+            })
+
+            pagarButton.addEventListener('click', function() {
+                const dataToSend = {
+                    numeroVuelo: idVuelo,
+                    identificacionUsuario: user.identificacion,
+                    claseVuelo: clase,
+                    precio: clase == 'turista' ? 100 : 400,
+                    numeroTarjeta: numeroTarjeta
+                }
+                
+                fetch('/api/pagarTiquete', {
+                    method: 'POST',
+                    body: JSON.stringify(dataToSend),
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                }).then(response => response.json())
+                .then(data => {
+                    console.log(data)
+                })
             })
         });
     </script>
