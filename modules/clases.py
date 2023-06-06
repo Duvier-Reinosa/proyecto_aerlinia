@@ -27,6 +27,14 @@ class Pasajero(persona):
     def mostrar(self):
         super().mostrar()
         print("Numero de millas: ",self.numero_millas)
+    def showData(self):
+        return {
+            "identifica": self.identifica,
+            "nombre": self.nombre,
+            "celular": self.celular,
+            "correo": self.correo,
+            "numero_millas": self.numero_millas
+        }
 
 
 
@@ -94,7 +102,6 @@ class Tiquete(Vuelo):
         self.valor=valor
         self.silla=silla
         self.equipaje_mano=True
-        self.equipaje_bodega=None
     def showData(self):
         return {
             "numero_vuelo": self.numero_vuelo,
@@ -113,7 +120,6 @@ class Tiquete(Vuelo):
             "valor": self.valor,
             "silla": self.silla,
             "equipaje_mano": self.equipaje_mano,
-            "equipaje_bodega": self.equipaje_bodega
         }
             
 class Pago():

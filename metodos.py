@@ -21,6 +21,14 @@ def registra_tiquetes(lista):
 def registra_vuelos(lista):
     with open("archivos/vuelos.pickle", "wb") as archivo:
         pickle.dump(lista, archivo)
+
+def registar_tiquetes(lista):
+    with open("archivos/tiquetes.pickle", "wb") as archivo:
+        pickle.dump(lista, archivo)
+
+def registrar_pagos(lista):
+    with open("archivos/pagos.pickle", "wb") as archivo:
+        pickle.dump(lista, archivo)
         
 #-----------lectura--------------
 def leer_aviones():
@@ -41,6 +49,16 @@ def leer_vuelos():
         with open("archivos/vuelos.pickle", "rb") as archivo:
             vuelos = pickle.load(archivo)
             return vuelos
+        
+def leet_pagos():
+        with open("archivos/pagos.pickle", "rb") as archivo:
+            pagos = pickle.load(archivo)
+            return pagos
+
+def leer_tiquetes():
+        with open("archivos/tiquetes.pickle", "rb") as archivo:
+            tiquetes = pickle.load(archivo)
+            return tiquetes
         
 #-----------verificaciones--------------
 def verificar_matricula(aviones,matricula):
@@ -239,7 +257,12 @@ def listarMatriculasAvion():
         })
     return json.dumps(aviones)
 
-
+def getUser(id):
+    usersFile = leer_usuarios()
+    for user in usersFile:
+        if user.identifica == id:
+            return user.showData()
+    return {}
 
 ##----------verificar vuelos  programados---
 

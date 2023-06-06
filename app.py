@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, jsonify
 import os
-from metodos import listarVuelosApi, listarMatriculasAvion, registrar_vuelos, registrar_aviones,registrar_usuarios,verificar_ingreso_usuario, listOneVuelo
+from metodos import listarVuelosApi, listarMatriculasAvion, registrar_vuelos, registrar_aviones,registrar_usuarios,verificar_ingreso_usuario, listOneVuelo, getUser
 
 app = Flask(__name__)
 
@@ -72,6 +72,14 @@ def getOneVuelo(id):
     if request.method == 'GET':
         # agregar metodo para obtener los vuelos, se pueden guardar en un archivo de texto hacer un metodo en el archivo metodos para obtener los vuelos
         return listOneVuelo(id)
+    else:
+        return []
+    
+@app.route('/api/user/<id>', methods=['GET'])
+def getOneUser(id):
+    if request.method == 'GET':
+        # agregar metodo para obtener los vuelos, se pueden guardar en un archivo de texto hacer un metodo en el archivo metodos para obtener los vuelos
+        return getUser(id)
     else:
         return []
     
