@@ -1,5 +1,4 @@
 from flask import Flask, render_template, request, jsonify
-import os
 from metodos import listarVuelosApi, listarMatriculasAvion, registrar_vuelos, registrar_aviones,registrar_usuarios,verificar_ingreso_usuario, listOneVuelo, getUser, pagarTiquete, listTiquetesForUser
 
 app = Flask(__name__)
